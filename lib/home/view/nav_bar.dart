@@ -1,33 +1,38 @@
 import 'package:fasting_app/home/home.dart';
 import 'package:flutter/material.dart';
 
+const navBarItems = {
+  HomePageTab.fast: NavigationDestination(
+    icon: Icon(Icons.schedule),
+    label: 'Fast',
+  ),
+  HomePageTab.settings: NavigationDestination(
+    icon: Icon(Icons.settings),
+    label: 'Settings',
+  ),
+};
+
 class NavBar extends StatelessWidget {
-  final Function(int) onTabSelected;
+  final HomePageTab selectedTab;
+  final Function(HomePageTab tab) onTabSelected;
 
   const NavBar({
     super.key,
+    required this.selectedTab,
     required this.onTabSelected,
   });
 
+  void _onItemSelected(int index) {
+    final tab = HomePageTab.values[index];
+    onTabSelected(tab);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          NavBarItem(
-            icon: Icons.schedule,
-            label: 'Fast',
-            onPressed: () => onTabSelected(0),
-          ),
-          NavBarItem(
-            icon: Icons.settings,
-            label: 'Settings',
-            onPressed: () => onTabSelected(3),
-          ),
-        ],
-      ),
+    return NavigationBar(
+      selectedIndex: HomePageTab.values.indexOf(selectedTab),
+      onDestinationSelected: _onItemSelected,
+      destinations: navBarItems.values.toList(),
     );
   }
 }
