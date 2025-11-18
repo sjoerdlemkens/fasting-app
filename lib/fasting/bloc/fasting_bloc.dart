@@ -9,8 +9,8 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   final FastingRepository _fastingRepo;
 
   FastingBloc({
-    required FastingRepository fastingRepository,
-  })  : _fastingRepo = fastingRepository,
+    required FastingRepository fastingRepo,
+  })  : _fastingRepo = fastingRepo,
         super(FastingInitial()) {
     on<FastStarted>(_onFastStarted);
     on<FastEnded>(_onFastEnded);
