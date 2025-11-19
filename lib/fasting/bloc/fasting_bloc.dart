@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_app/fasting/fasting.dart';
 
