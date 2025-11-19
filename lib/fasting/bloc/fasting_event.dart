@@ -1,8 +1,16 @@
 part of 'fasting_bloc.dart';
 
 @immutable
-sealed class FastingEvent {}
+sealed class FastingEvent {
+  const FastingEvent();
+}
 
 class FastStarted extends FastingEvent {}
 
 class FastEnded extends FastingEvent {}
+
+class _TimerTicked extends FastingEvent {
+  final Duration duration;
+
+  const _TimerTicked({required this.duration});
+}
