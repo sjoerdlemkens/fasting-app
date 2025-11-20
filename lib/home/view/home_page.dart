@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         BlocProvider<SettingsBloc>(
           create: (context) => SettingsBloc(
             settingsRepo: settingsRepo,
-          ),
+          )..add(LoadSettings()),
         ),
         BlocProvider<FastingBloc>(
           create: (context) => FastingBloc(

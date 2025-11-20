@@ -16,12 +16,26 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   void _onLoadSettings(LoadSettings event, Emitter<SettingsState> emit) async {
-    // TODO: Load settings from the repository
-    await Future.delayed(Duration(seconds: 1));
-    final settings = Settings(); 
+    emit(SettingsLoading());
 
-    if (!isClosed) {
-      emit(SettingsLoaded(settings));
+    try {
+      final settings = await _fetchSettings();
+
+      if (!isClosed) {
+        emit(SettingsLoaded(settings));
+      }
+    } catch (_) {
+      // Fallback to initial state on error
+      if (!isClosed) {
+        emit(SettingsInitial());
+      }
     }
+  }
+
+  Future<Settings> _fetchSettings() async {
+    await Future.delayed(Duration(seconds: 1));
+    final settings = Settings();
+
+    return settings;
   }
 }
