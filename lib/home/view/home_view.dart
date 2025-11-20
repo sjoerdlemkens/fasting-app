@@ -5,7 +5,7 @@ import 'package:fasting_app/home/home.dart';
 
 const homeViewWidgets = {
   HomePageView.fast: FastingView(),
-  HomePageView.settings: SettingsTab(),
+  HomePageView.settings: SettingsView(),
 };
 
 class HomeView extends StatefulWidget {

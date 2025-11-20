@@ -1,1 +1,1 @@
-export 'settings_tab.dart';
+export 'settings_view.dart';
