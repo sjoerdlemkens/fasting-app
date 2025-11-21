@@ -1,5 +1,5 @@
 import 'package:fasting_api/fasting_api.dart';
-import 'package:fasting_repository/fasting_repository.dart';
+import 'package:fasting_entities/fasting_entities.dart';
 
 class FastingRepository {
   final FastingApi _fastingApi;

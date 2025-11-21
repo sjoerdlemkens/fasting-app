@@ -9,6 +9,8 @@ environment:
 dependencies:
   fasting_api:
     path: ../../../data_providers/fasting_api
+  fasting_entities:
+    path: ../../../domain/fasting_entities
 
 dev_dependencies:
   lints: ^5.0.0
