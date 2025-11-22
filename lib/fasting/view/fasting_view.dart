@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fasting_app/fasting/fasting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fasting_app/misc/misc.dart';
+import 'package:fasting_app/fasting/fasting.dart';
 
 class FastingView extends StatelessWidget {
   const FastingView({super.key});
@@ -10,9 +11,7 @@ class FastingView extends StatelessWidget {
     return BlocBuilder<FastingBloc, FastingState>(
       builder: (context, state) => switch (state) {
         FastingInitial() => FastingInitialView(),
-        FastingLoading() => Center(
-            child: CircularProgressIndicator(),
-          ),
+        FastingLoading() => LoadingView(), 
         FastingInProgress() => FastingInProgressView(state),
       },
     );
