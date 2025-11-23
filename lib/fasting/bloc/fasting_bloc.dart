@@ -43,6 +43,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         _startTicker(startFrom: elapsed);
 
         emit(FastingInProgress(
+          window: activeFast.window,
           started: activeFast.start,
           elapsed: elapsed,
         ));
@@ -56,6 +57,9 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   }
 
   void _onFastStarted(FastStarted event, Emitter<FastingState> emit) async {
+  // TODO: Retrieve the fasting window from user settings
+  final fastingWindow = FastingWindow.eighteenSix;
+
     final fast = await _fastingRepo.createFastingSession(
       window: FastingWindow.eighteenSix,
       started: DateTime.now(),
@@ -64,6 +68,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     _startTicker();
 
     emit(FastingInProgress(
+      window: fastingWindow,
       started: fast.start,
     ));
   }

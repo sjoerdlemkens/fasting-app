@@ -17,10 +17,12 @@ final class FastingLoading extends FastingState {
 }
 
 final class FastingInProgress extends FastingState {
+  final FastingWindow window;
   final DateTime started;
   final Duration elapsed;
 
   const FastingInProgress({
+    required this.window,
     required this.started,
     this.elapsed = Duration.zero,
   });
@@ -28,8 +30,10 @@ final class FastingInProgress extends FastingState {
   FastingInProgress copyWith({
     DateTime? started,
     Duration? elapsed,
+    FastingWindow? window,
   }) {
     return FastingInProgress(
+      window: window ?? this.window,
       started: started ?? this.started,
       elapsed: elapsed ?? this.elapsed,
     );
