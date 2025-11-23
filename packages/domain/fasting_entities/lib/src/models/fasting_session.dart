@@ -1,13 +1,13 @@
 
 import 'package:fasting_entities/fasting_entities.dart';
 
-class Fast {
+class FastingSession {
   final int? id;
   final DateTime start;
   final DateTime? end;
   final FastingWindow window;
 
-  const Fast({
+  const FastingSession({
     this.id,
     required this.window,
     required this.start,
@@ -22,13 +22,13 @@ class Fast {
       (end ?? DateTime.now()).difference(start);
 
   /// Create a copy with changes (immutable pattern).
-  Fast copyWith({
+  FastingSession copyWith({
     int? id,
     DateTime? start,
     DateTime? end,
     FastingWindow? window,
   }) {
-    return Fast(
+    return FastingSession(
       id: id ?? this.id,
       start: start ?? this.start,
       end: end ?? this.end,

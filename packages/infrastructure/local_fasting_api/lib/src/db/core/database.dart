@@ -7,7 +7,7 @@ import 'package:path/path.dart' as path;
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [Fasts])
+@DriftDatabase(tables: [FastingSessions])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 

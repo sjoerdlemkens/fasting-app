@@ -1,1 +1,1 @@
-export 'fasts_table.dart';
+export 'fasting_sessions_table.dart';

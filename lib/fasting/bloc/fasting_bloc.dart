@@ -36,7 +36,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   ) async {
     emit(const FastingLoading());
     try {
-      final activeFast = await _fastingRepo.getActiveFast();
+      final activeFast = await _fastingRepo.getActiveFastingSession();
 
       if (activeFast != null) {
         final elapsed = DateTime.now().difference(activeFast.start);
@@ -56,7 +56,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   }
 
   void _onFastStarted(FastStarted event, Emitter<FastingState> emit) async {
-    final fast = await _fastingRepo.createFast(
+    final fast = await _fastingRepo.createFastingSession(
       window: FastingWindow.eighteenSix,
       started: DateTime.now(),
     );

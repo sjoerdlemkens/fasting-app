@@ -8,16 +8,16 @@ class FastingRepository {
     required LocalFastingApi fastingApi,
   }) : _fastingApi = fastingApi;
 
-  Future<Fast> createFast({
+  Future<FastingSession> createFastingSession({
     required DateTime started,
     required FastingWindow window,
   }) async {
-    final createdFast = await _fastingApi.createFast(
+    final createdFast = await _fastingApi.createFastingSession(
       started: started,
     );
 
 //TODO: use extension method to map
-    final mappedFast = Fast(
+    final mappedFast = FastingSession(
       id: createdFast.id,
       start: createdFast.start,
       window: window, // map fasting window appropriately
@@ -26,13 +26,13 @@ class FastingRepository {
     return mappedFast;
   }
 
-  Future<Fast?> getActiveFast() async {
-    final activeFast = await _fastingApi.getActiveFast();
+  Future<FastingSession?> getActiveFastingSession() async {
+    final activeFast = await _fastingApi.getActiveFastingSession();
     if (activeFast == null) {
       return null;
     }
 
-    final mappedFast = Fast(
+    final mappedFast = FastingSession(
       id: activeFast.id,
       start: activeFast.start,
       window: FastingWindow.eighteenSix, // map fasting window appropriately
