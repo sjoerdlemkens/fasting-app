@@ -1,5 +1,5 @@
-import 'package:fasting_entities/fasting_entities.dart';
-import 'package:local_fasting_api/local_fasting_api.dart';
+import 'package:fasting_repository/fasting_repository.dart';
+import 'package:local_fasting_api/local_fasting_api.dart' hide FastingSession;
 
 class FastingRepository {
   final LocalFastingApi _fastingApi;
@@ -9,34 +9,24 @@ class FastingRepository {
   }) : _fastingApi = fastingApi;
 
   Future<FastingSession> createFastingSession({
-    required DateTime started,
     required FastingWindow window,
+    required DateTime started,
   }) async {
     final createdFast = await _fastingApi.createFastingSession(
+      window: window.toInt(),
       started: started,
     );
 
-//TODO: use extension method to map
-    final mappedFast = FastingSession(
-      id: createdFast.id,
-      start: createdFast.start,
-      window: window, // map fasting window appropriately
-    );
+    final mappedFast = createdFast.toDomain();
 
     return mappedFast;
   }
 
   Future<FastingSession?> getActiveFastingSession() async {
     final activeFast = await _fastingApi.getActiveFastingSession();
-    if (activeFast == null) {
-      return null;
-    }
+    if (activeFast == null) return null;
 
-    final mappedFast = FastingSession(
-      id: activeFast.id,
-      start: activeFast.start,
-      window: FastingWindow.eighteenSix, // map fasting window appropriately
-    );
+    final mappedFast = activeFast.toDomain();
 
     return mappedFast;
   }
