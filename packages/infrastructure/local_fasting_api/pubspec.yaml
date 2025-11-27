@@ -1,6 +1,7 @@
 name: local_fasting_api
 description: An implementation of the FastingApi that uses Drift/sqllite.
 version: 1.0.0
+resolution: workspace
 publish_to: none
 
 environment:
@@ -15,5 +16,5 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.10.4
   drift_dev: ^2.29.0
-  lints: ^5.0.0
+  lints: ^6.0.0
   test: ^1.24.0

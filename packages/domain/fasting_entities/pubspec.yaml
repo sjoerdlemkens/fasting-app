@@ -1,6 +1,7 @@
 name: fasting_entities
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
+resolution: workspace
 publish_to: none
 
 environment:

@@ -1,6 +1,7 @@
 name: notifications_service
 description: The abstraction of a service used for showing/scheduling notifications.  
 version: 1.0.0
+resolution: workspace
 publish_to: none
 
 environment:

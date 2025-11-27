@@ -1,6 +1,7 @@
 name: fasting_repository
 description: A repository that handles fasting related requests.
 version: 1.0.0
+resolution: workspace
 publish_to: none
 
 environment:
@@ -13,5 +14,5 @@ dependencies:
     path: ../../fasting_entities
 
 dev_dependencies:
-  lints: ^5.0.0
+  lints: ^6.0.0
   test: ^1.24.0

@@ -1,6 +1,7 @@
 name: fasting_use_cases
 description: Package holding business logic wrapped in use cases 
 version: 1.0.0
+resolution: workspace
 publish_to: none
 
 environment:
