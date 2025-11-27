@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 📜 Get Flutter version from .fvmrc
+        id: flutter-version
+        run: |
+          echo "FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)" >> $GITHUB_ENV
+
+      - name: 💻 Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: 🗄️ Cache Flutter and Dart dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            **/.dart_tool
+            **/build
+          key: ${{ runner.os }}-flutter-pub-cache-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-pub-cache-
+
+      - name: 🌋 Set up Melos & Install Dependencies
+        uses: bluefireteam/melos-action@v3
+        with:
+          run-bootstrap: true
+
+      - name: ✨ Verify formatting
+        run: melos format
+
+      - name: 🔍 Analyze code
+        run: melos lint
+
+      - name: 🧪 Run tests
+        run: melos test
