@@ -1,0 +1,16 @@
+name: local_notifications_service
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  flutter_local_notifications: ^19.5.0
+  notifications_service: 
+    path: ../../application/notifications_service
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
