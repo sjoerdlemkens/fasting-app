@@ -1,4 +1,4 @@
-name: fasting 
+name: fasting
 
 environment:
   sdk: ^3.9.0
@@ -18,8 +18,7 @@ dev_dependencies:
 
 melos:
   name: Fasting App
-  sdkPath: .fvm/flutter_sdk
-  
+
   scripts:
     # Linting scripts
     lint:
@@ -27,13 +26,13 @@ melos:
       run: dart analyze .
       exec:
         concurrency: 1
-    
+
     lint:fix:
       description: Apply lint fixes for all packages
       run: dart fix --apply
       exec:
         concurrency: 1
-    
+
     # Testing scripts
     test:
       description: Run tests for all packages
@@ -41,30 +40,29 @@ melos:
       exec:
         concurrency: 1
         failFast: true
-    
+
     test:coverage:
       description: Run tests with coverage for all packages
       run: dart test --coverage=coverage && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
       exec:
         concurrency: 1
-    
+
     # Code formatting
     format:
       description: Format all Dart code
       run: dart format --set-exit-if-changed .
       exec:
         concurrency: 1
-    
+
     format:fix:
       description: Format all Dart code (write changes)
       run: dart format .
       exec:
         concurrency: 1
-    
+
     # Dependency management
     upgrade:
       description: Upgrade dependencies for all packages
       run: dart pub upgrade
       exec:
         concurrency: 1
-    
