@@ -51,3 +51,5 @@ app/android/app/release
 # Generated files
 **/*.g.dart
 
+# FVM Version Cache
+.fvm/

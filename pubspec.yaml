@@ -18,6 +18,7 @@ dev_dependencies:
 
 melos:
   name: Fasting App
+  sdkPath: .fvm/flutter_sdk
   
   scripts:
     # Linting scripts
