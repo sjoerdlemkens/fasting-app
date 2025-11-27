@@ -3,9 +3,8 @@ import 'package:fasting_repository/fasting_repository.dart';
 class GetMonthlyHistoryUseCase {
   final FastingRepository _fastingRepository;
 
-  GetMonthlyHistoryUseCase({
-    required FastingRepository fastingRepository,
-  }) : _fastingRepository = fastingRepository;
+  GetMonthlyHistoryUseCase({required FastingRepository fastingRepository})
+    : _fastingRepository = fastingRepository;
 
   /// Gets fasting sessions for a given month and returns them grouped by day
   Future<Map<DateTime, List<FastingSession>>> call(DateTime month) async {
