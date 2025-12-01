@@ -64,6 +64,8 @@ melos:
     build_runner:
       description: Run build_runner to generate code
       run: dart run build_runner build --delete-conflicting-outputs
+      packageFilters:
+        dependsOn: build_runner
       exec:
         concurrency: 1
 
