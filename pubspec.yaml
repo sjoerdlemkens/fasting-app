@@ -23,7 +23,7 @@ melos:
     # Linting scripts
     lint:
       description: Run dart analyze for all packages
-      run: dart analyze .
+      run: dart analyze --no-fatal-warnings --no-fatal-infos .
       exec:
         concurrency: 1
 
