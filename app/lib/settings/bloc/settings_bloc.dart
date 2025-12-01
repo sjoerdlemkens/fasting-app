@@ -2,16 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
-import 'package:settings_repository/settings_repository.dart';
+import 'package:fasting_use_cases/fasting_use_cases.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SettingsRepository _settingsRepo;
+  final GetFastingWindowUseCase _getFastingWindow;
+  final SetFastingWindowUseCase _setFastingWindow;
 
-  SettingsBloc({required SettingsRepository settingsRepo})
-      : _settingsRepo = settingsRepo,
+  SettingsBloc({
+    required GetFastingWindowUseCase getFastingWindow,
+    required SetFastingWindowUseCase setFastingWindow,
+  })  : _getFastingWindow = getFastingWindow,
+        _setFastingWindow = setFastingWindow,
         super(SettingsInitial()) {
     on<LoadSettings>(_onLoadSettings);
     on<UpdateFastingWindow>(_onUpdateFastingWindow);
@@ -21,7 +25,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsLoading());
 
     try {
-      final settings = await _fetchSettings();
+      final fastingWindow = await _getFastingWindow();
+      final settings = Settings(fastingWindow: fastingWindow);
 
       if (!isClosed) {
         emit(SettingsLoaded(settings));
@@ -39,25 +44,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final currentState = state;
 
     if (currentState is SettingsLoaded) {
-      final updatedSettings = currentState.settings.copyWith(
-        fastingWindow: event.fastingWindow,
-      );
+      try {
+        await _setFastingWindow(event.fastingWindow);
 
-      // TODO: Persist settings to repository
-      // await _settingsRepo.saveSettings(updatedSettings);
+        final updatedSettings = currentState.settings.copyWith(
+          fastingWindow: event.fastingWindow,
+        );
 
-      emit(SettingsLoaded(updatedSettings));
+        if (!isClosed) {
+          emit(SettingsLoaded(updatedSettings));
+        }
+      } catch (_) {
+        // On error, keep the current state unchanged
+        // Could emit an error state if needed
+      }
     }
-  }
-
-  Future<Settings> _fetchSettings() async {
-    // TODO: Fetch settings from repository
-
-    await Future.delayed(Duration(seconds: 1));
-    final settings = Settings(
-      fastingWindow: FastingWindow.eighteenSix,
-    );
-
-    return settings;
   }
 }

@@ -20,7 +20,12 @@ class HomePage extends StatelessWidget {
         BlocProvider<SettingsBloc>(
           lazy: false,
           create: (context) => SettingsBloc(
-            settingsRepo: settingsRepo,
+            getFastingWindow: GetFastingWindowUseCase(
+              settingsRepo: settingsRepo,
+            ),
+            setFastingWindow: SetFastingWindowUseCase(
+              settingsRepo: settingsRepo,
+            ),
           )..add(LoadSettings()),
         ),
         BlocProvider<FastingBloc>(

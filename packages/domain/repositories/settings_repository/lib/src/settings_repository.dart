@@ -19,4 +19,9 @@ class SettingsRepository {
     final mappedFastingWindow = FastingWindowMappers.fromInt(fastingType);
     return mappedFastingWindow;
   }
+
+  Future<void> setFastingWindow(FastingWindow fastingWindow) async {
+    final fastingType = fastingWindow.toInt();
+    await _settingsApi.setFastingType(fastingType);
+  }
 }

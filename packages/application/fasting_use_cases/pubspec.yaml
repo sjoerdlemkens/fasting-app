@@ -8,6 +8,8 @@ environment:
   sdk: ^3.10.1
 
 dependencies:
+  fasting_entities:
+    path: ../../domain/fasting_entities
   fasting_repository:
     path: ../../domain/repositories/fasting_repository
 
