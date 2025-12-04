@@ -13,7 +13,7 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fasting App',
+      title: 'Fasting Tracker',
       theme: FastingTheme.light,
       // darkTheme: FastingTheme.dark,
       home: const HomePage(),

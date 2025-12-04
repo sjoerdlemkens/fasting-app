@@ -17,7 +17,7 @@ dev_dependencies:
   melos: ^7.3.0
 
 melos:
-  name: Fasting App
+  name: Fasting Tracker 
 
   scripts:
     # Linting scripts
