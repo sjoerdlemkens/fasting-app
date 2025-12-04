@@ -32,9 +32,19 @@ class HomeNavBar extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => NavigationBar(
-        selectedIndex: HomePageView.values.indexOf(selectedView),
-        onDestinationSelected: _onItemSelected,
-        destinations: navBarItems.values.toList(),
+  Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.grey[300]!,
+              width: 1,
+            ),
+          ),
+        ),
+        child: NavigationBar(
+          selectedIndex: HomePageView.values.indexOf(selectedView),
+          onDestinationSelected: _onItemSelected,
+          destinations: navBarItems.values.toList(),
+        ),
       );
 }

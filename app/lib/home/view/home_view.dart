@@ -4,7 +4,7 @@ import 'package:fasting_app/fasting/fasting.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_app/home/home.dart';
 
-const homeViewWidgets = {
+const _homeViewWidgets = {
   HomePageView.fast: FastingView(),
   HomePageView.history: HistoryView(),
   HomePageView.settings: SettingsView(),
@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: HomeAppBar(_selectedView),
-        body: homeViewWidgets[_selectedView],
+        body: _homeViewWidgets[_selectedView],
         bottomNavigationBar: HomeNavBar(
           selectedView: _selectedView,
           onViewSelected: _onViewSelected,

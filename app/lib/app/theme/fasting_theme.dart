@@ -4,19 +4,34 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FastingTheme {
   static ThemeData get light {
+    final colorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: FastingColors.lightBlue,
+      onPrimary: Colors.white,
+      secondary: FastingColors.lightBlue,
+      onSecondary: Colors.white,
+      error: Colors.red,
+      onError: Colors.white,
+      surface: FastingColors.almostWhite,
+      onSurface: Colors.black,
+      surfaceContainer: Colors.white,
+    );
+
     return ThemeData(
       useMaterial3: true,
       textTheme: GoogleFonts.interTextTheme(),
-      colorScheme: ColorScheme(
-        brightness: Brightness.light,
-        primary: FastingColors.lightBlue,
-        onPrimary: Colors.white,
-        secondary: FastingColors.peach,
-        onSecondary: Colors.white,
-        error: Colors.red,
-        onError: Colors.white,
-        surface: FastingColors.lightGrey,
-        onSurface: Colors.black,
+      colorScheme: colorScheme,
+      cardTheme: CardThemeData(
+        color: Colors.white,
+        elevation: 1,
+        shadowColor: Colors.grey.shade200.withOpacity(0.5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        margin: const EdgeInsets.all(0),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: Colors.white,
       ),
     );
   }

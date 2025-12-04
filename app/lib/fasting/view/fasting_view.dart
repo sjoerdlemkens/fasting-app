@@ -9,7 +9,7 @@ class FastingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: BlocBuilder<FastingBloc, FastingState>(
             builder: (context, state) => switch (state) {
               FastingInitial() => FastingInitialView(),
