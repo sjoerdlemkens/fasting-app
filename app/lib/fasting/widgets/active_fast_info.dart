@@ -15,7 +15,7 @@ class ActiveFastInfo extends StatelessWidget {
         progress: session.progress,
         child: ActiveFastContent(
           elapsed: session.elapsed,
-          remaining: session.remaining,
+          targetHours: session.window?.duration.inHours,
         ),
       );
 }

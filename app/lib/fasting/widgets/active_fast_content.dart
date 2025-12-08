@@ -3,12 +3,12 @@ import 'package:fasting_app/fasting/fasting.dart';
 
 class ActiveFastContent extends StatelessWidget {
   final Duration elapsed;
-  final Duration remaining;
+  final int? targetHours;
 
   const ActiveFastContent({
     super.key,
     required this.elapsed,
-    required this.remaining,
+    this.targetHours,
   });
 
   @override
@@ -19,9 +19,11 @@ class ActiveFastContent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Elapsed time",
+          "TIME ELAPSED",
           style: TextStyle(
             fontSize: 14,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5,
             color: Colors.grey[600],
           ),
         ),
@@ -31,26 +33,32 @@ class ActiveFastContent extends StatelessWidget {
           style: const TextStyle(
             fontSize: 48,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            letterSpacing: -0.5,
+            color: Color(0xFF0F172A), // slate-900
           ),
         ),
-        const SizedBox(height: 16),
-        Text(
-          "Remaining",
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.grey[600],
+        if (targetHours != null) ...[
+          const SizedBox(height: 8),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.gps_fixed,
+                size: 16,
+                color: Colors.grey[600],
+              ),
+              const SizedBox(width: 6),
+              Text(
+                "Target: $targetHours hours",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[600],
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          TimeFormatter.formatDuration(remaining),
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
-          ),
-        ),
+        ],
       ],
     );
   }
