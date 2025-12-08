@@ -1,4 +1,4 @@
-name: fasting
+name: fasting_workspace
 
 environment:
   sdk: ^3.9.0
