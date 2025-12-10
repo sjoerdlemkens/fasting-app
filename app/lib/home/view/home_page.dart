@@ -29,19 +29,26 @@ class HomePage extends StatelessWidget {
           )..add(LoadSettings()),
         ),
         BlocProvider<FastingBloc>(
-          create: (context) => FastingBloc(
-            startFast: StartFastUseCase(
-              fastingRepo: fastingRepo,
-              settingsRepo: settingsRepo,
-            ),
-            endFast: EndFastUseCase(
-              fastingRepo: fastingRepo,
-              settingsRepo: settingsRepo,
-            ),
-            getActiveFast: GetActiveFastUseCase(
-              fastingRepo: fastingRepo,
-            ),
-          )..add(LoadActiveFast()),
+          create: (context) {
+            final settingsBloc = context.read<SettingsBloc>();
+            return FastingBloc(
+              startFast: StartFastUseCase(
+                fastingRepo: fastingRepo,
+                settingsRepo: settingsRepo,
+              ),
+              endFast: EndFastUseCase(
+                fastingRepo: fastingRepo,
+                settingsRepo: settingsRepo,
+              ),
+              getActiveFast: GetActiveFastUseCase(
+                fastingRepo: fastingRepo,
+              ),
+              updateActiveFastWindow: UpdateActiveFastWindowUseCase(
+                fastingRepo: fastingRepo,
+              ),
+              settingsBloc: settingsBloc,
+            )..add(LoadActiveFast());
+          },
         ),
       ],
       child: HomeView(),

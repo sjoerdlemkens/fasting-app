@@ -3,6 +3,7 @@ import 'package:fasting_use_cases/fasting_use_cases.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:fasting_app/fasting/fasting.dart';
+import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart'; // FastingWindow comes from here
 
 part 'fasting_event.dart';
@@ -12,24 +13,37 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   final StartFastUseCase _startFast;
   final EndFastUseCase _endFast;
   final GetActiveFastUseCase _getActiveFast;
+  final UpdateActiveFastWindowUseCase _updateActiveFastWindow;
 
   final Ticker _ticker;
   StreamSubscription<int>? _tickerSubscription;
+  StreamSubscription<SettingsState>? _settingsSubscription;
 
   FastingBloc({
     required StartFastUseCase startFast,
     required EndFastUseCase endFast,
     required GetActiveFastUseCase getActiveFast,
+    required UpdateActiveFastWindowUseCase updateActiveFastWindow,
+    required SettingsBloc settingsBloc,
     Ticker ticker = const Ticker(),
   })  : _startFast = startFast,
         _endFast = endFast,
         _getActiveFast = getActiveFast,
+        _updateActiveFastWindow = updateActiveFastWindow,
         _ticker = ticker,
         super(FastingInitial()) {
     on<LoadActiveFast>(_onLoadActiveFast);
     on<FastStarted>(_onFastStarted);
     on<FastEnded>(_onFastEnded);
     on<_TimerTicked>(_onTimerTicked);
+    on<UpdateActiveFastWindow>(_onUpdateActiveFastWindow);
+
+    // Listen to SettingsBloc changes
+    _settingsSubscription = settingsBloc.stream.listen((settingsState) {
+      if (settingsState is SettingsLoaded) {
+        add(UpdateActiveFastWindow(settingsState.settings.fastingWindow));
+      }
+    });
   }
 
   void _onLoadActiveFast(
@@ -96,9 +110,31 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     emit(newState);
   }
 
+  Future<void> _onUpdateActiveFastWindow(
+    UpdateActiveFastWindow event,
+    Emitter<FastingState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is! FastingInProgress) return;
+
+    // Only update if the window has actually changed
+    if (currentState.session.window == event.window) return;
+
+    try {
+      final updatedSession = await _updateActiveFastWindow.call(event.window);
+      if (updatedSession != null) {
+        emit(FastingInProgress(updatedSession));
+      }
+    } catch (e) {
+      // On error, keep the current state unchanged
+      // Could emit an error state if needed
+    }
+  }
+
   @override
   Future<void> close() {
     _tickerSubscription?.cancel();
+    _settingsSubscription?.cancel();
     return super.close();
   }
 }

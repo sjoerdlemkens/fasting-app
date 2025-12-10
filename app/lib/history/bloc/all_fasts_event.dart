@@ -17,3 +17,4 @@ class ChangeAllFastsMonth extends AllFastsEvent {
   const ChangeAllFastsMonth(this.month);
 }
 
+
