@@ -7,7 +7,7 @@ environment:
 workspace:
   - packages/application/fasting_use_cases
   - packages/application/notifications_service
-  - packages/domain/fasting_entities
+  - packages/domain/fasting_domain
   - packages/domain/repositories/fasting_repository
   - packages/domain/repositories/settings_repository
   - packages/infrastructure/settings_api
@@ -17,7 +17,7 @@ dev_dependencies:
   melos: ^7.3.0
 
 melos:
-  name: Fasting Tracker 
+  name: Fasting Tracker
 
   scripts:
     # Linting scripts

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:fasting_entities/fasting_entities.dart';
+import 'package:fasting_domain/fasting_domain.dart';
 import 'package:fasting_repository/src/extensions/fasting_window_mappers.dart';
 
 void main() {

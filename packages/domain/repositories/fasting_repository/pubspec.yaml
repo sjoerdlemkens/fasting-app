@@ -10,8 +10,8 @@ environment:
 dependencies:
   local_fasting_api:
     path: ../../../infrastructure/local_fasting_api
-  fasting_entities:
-    path: ../../fasting_entities
+  fasting_domain:
+    path: ../../fasting_domain
 
 dev_dependencies:
   mocktail: ^1.0.4

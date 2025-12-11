@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:fasting_entities/fasting_entities.dart';
+import 'package:fasting_domain/fasting_domain.dart';
 import 'package:local_fasting_api/local_fasting_api.dart' as api;
 import 'package:fasting_repository/src/extensions/fasting_session_mappers.dart';
 
