@@ -32,3 +32,30 @@ Runner/GeneratedPluginRegistrant.*
 !default.mode2v3
 !default.pbxuser
 !default.perspectivev3
+
+# iOS
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Podfile.lock
+ios/build/
+ios/DerivedData/
+*.xcuserdatad
+*.xcworkspace
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.ipa
+*.app
+*.dSYM
+*.dSYM.zip
+
+# Fastlane
+fastlane/report.xml
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/*.p8
+fastlane/*.pem
+fastlane/Matchfile.lock
+fastlane/fastlane_keychain_login
