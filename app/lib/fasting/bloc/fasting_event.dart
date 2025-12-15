@@ -22,3 +22,7 @@ class _TimerTicked extends FastingEvent {
 
   const _TimerTicked({required this.duration});
 }
+
+class _PreviewTimerTicked extends FastingEvent {
+  const _PreviewTimerTicked();
+}

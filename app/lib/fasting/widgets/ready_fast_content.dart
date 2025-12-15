@@ -1,4 +1,3 @@
-import 'package:fasting_app/fasting/utils/time_formatter.dart';
 import 'package:flutter/material.dart';
 
 class ReadyFastContent extends StatelessWidget {
@@ -17,20 +16,11 @@ class ReadyFastContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            "Tap to begin",
+            "Not fasting",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: Colors.grey[600],
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            TimeFormatter.formatDuration(duration),
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[400],
             ),
           ),
         ],

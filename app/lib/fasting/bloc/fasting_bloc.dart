@@ -18,6 +18,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   final Ticker _ticker;
   StreamSubscription<int>? _tickerSubscription;
   StreamSubscription<SettingsState>? _settingsSubscription;
+  Timer? _previewTimer;
 
   FastingBloc({
     required StartFastUseCase startFast,
@@ -37,6 +38,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     on<FastEnded>(_onFastEnded);
     on<_TimerTicked>(_onTimerTicked);
     on<UpdateActiveFastWindow>(_onUpdateActiveFastWindow);
+    on<_PreviewTimerTicked>(_onPreviewTimerTicked);
 
     // Listen to SettingsBloc changes
     _settingsSubscription = settingsBloc.stream.listen((settingsState) {
@@ -44,6 +46,9 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         add(UpdateActiveFastWindow(settingsState.settings.fastingWindow));
       }
     });
+
+    // Start preview timer for initial state
+    _startPreviewTimer();
   }
 
   void _onLoadActiveFast(
@@ -57,20 +62,24 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
 
       if (activeFastingSession != null) {
         final elapsed = DateTime.now().difference(activeFastingSession.start);
+        _stopPreviewTimer();
         _startTicker(startFrom: elapsed);
 
         emit(FastingInProgress(activeFastingSession));
       } else {
+        _startPreviewTimer();
         emit(const FastingInitial());
       }
     } catch (e) {
       // TODO:  Log the error
+      _startPreviewTimer();
       emit(const FastingInitial());
     }
   }
 
   void _onFastStarted(FastStarted event, Emitter<FastingState> emit) async {
     final fastingSession = await _startFast.call();
+    _stopPreviewTimer();
     _startTicker();
 
     emit(
@@ -89,6 +98,21 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         );
   }
 
+  void _startPreviewTimer() {
+    _stopPreviewTimer();
+    // Update every minute to refresh the end time preview
+    _previewTimer = Timer.periodic(const Duration(minutes: 1), (_) {
+      if (state is FastingInitial) {
+        add(const _PreviewTimerTicked());
+      }
+    });
+  }
+
+  void _stopPreviewTimer() {
+    _previewTimer?.cancel();
+    _previewTimer = null;
+  }
+
   void _onFastEnded(FastEnded event, Emitter<FastingState> emit) {
     final state = this.state;
     if (state is! FastingInProgress) return;
@@ -97,6 +121,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     _endFast.call(fastId);
 
     _tickerSubscription?.cancel();
+    _startPreviewTimer();
     emit(FastingInitial());
   }
 
@@ -108,6 +133,16 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     final newState = currentState.copyWith();
 
     emit(newState);
+  }
+
+  void _onPreviewTimerTicked(
+    _PreviewTimerTicked event,
+    Emitter<FastingState> emit,
+  ) {
+    if (state is! FastingInitial) return;
+
+    // Emit a new FastingInitial state to trigger UI rebuild
+    emit(const FastingInitial());
   }
 
   Future<void> _onUpdateActiveFastWindow(
@@ -135,6 +170,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   Future<void> close() {
     _tickerSubscription?.cancel();
     _settingsSubscription?.cancel();
+    _stopPreviewTimer();
     return super.close();
   }
 }
