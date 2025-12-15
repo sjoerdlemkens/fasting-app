@@ -14,6 +14,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
   final EndFastUseCase _endFast;
   final GetActiveFastUseCase _getActiveFast;
   final UpdateActiveFastWindowUseCase _updateActiveFastWindow;
+  final UpdateActiveFastStartTimeUseCase _updateActiveFastStartTime;
 
   final Ticker _ticker;
   StreamSubscription<int>? _tickerSubscription;
@@ -25,12 +26,14 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     required EndFastUseCase endFast,
     required GetActiveFastUseCase getActiveFast,
     required UpdateActiveFastWindowUseCase updateActiveFastWindow,
+    required UpdateActiveFastStartTimeUseCase updateActiveFastStartTime,
     required SettingsBloc settingsBloc,
     Ticker ticker = const Ticker(),
   })  : _startFast = startFast,
         _endFast = endFast,
         _getActiveFast = getActiveFast,
         _updateActiveFastWindow = updateActiveFastWindow,
+        _updateActiveFastStartTime = updateActiveFastStartTime,
         _ticker = ticker,
         super(FastingInitial()) {
     on<LoadActiveFast>(_onLoadActiveFast);
@@ -38,6 +41,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     on<FastEnded>(_onFastEnded);
     on<_TimerTicked>(_onTimerTicked);
     on<UpdateActiveFastWindow>(_onUpdateActiveFastWindow);
+    on<UpdateActiveFastStartTime>(_onUpdateActiveFastStartTime);
     on<_PreviewTimerTicked>(_onPreviewTimerTicked);
 
     // Listen to SettingsBloc changes
@@ -161,6 +165,32 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         emit(FastingInProgress(updatedSession));
       }
     } catch (e) {
+      // On error, keep the current state unchanged
+      // Could emit an error state if needed
+    }
+  }
+
+  Future<void> _onUpdateActiveFastStartTime(
+    UpdateActiveFastStartTime event,
+    Emitter<FastingState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is! FastingInProgress) return;
+
+    // // Only update if the start time has actually changed
+    // if (currentState.session.start == event.startTime) return;
+
+    try {
+      final updatedSession =
+          await _updateActiveFastStartTime.call(event.startTime);
+      if (updatedSession != null) {
+        // Recalculate elapsed time and restart ticker
+        final elapsed = DateTime.now().difference(updatedSession.start);
+        _startTicker(startFrom: elapsed);
+        emit(FastingInProgress(updatedSession));
+      }
+    } catch (e) {
+      print(e);
       // On error, keep the current state unchanged
       // Could emit an error state if needed
     }

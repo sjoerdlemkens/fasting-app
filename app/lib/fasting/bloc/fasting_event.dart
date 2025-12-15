@@ -17,6 +17,12 @@ class UpdateActiveFastWindow extends FastingEvent {
   const UpdateActiveFastWindow(this.window);
 }
 
+class UpdateActiveFastStartTime extends FastingEvent {
+  final DateTime startTime;
+
+  const UpdateActiveFastStartTime(this.startTime);
+}
+
 class _TimerTicked extends FastingEvent {
   final Duration duration;
 

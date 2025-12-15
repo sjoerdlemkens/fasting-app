@@ -46,6 +46,9 @@ class HomePage extends StatelessWidget {
               updateActiveFastWindow: UpdateActiveFastWindowUseCase(
                 fastingRepo: fastingRepo,
               ),
+              updateActiveFastStartTime: UpdateActiveFastStartTimeUseCase(
+                fastingRepo: fastingRepo,
+              ),
               settingsBloc: settingsBloc,
             )..add(LoadActiveFast());
           },

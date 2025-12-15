@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/fasting/fasting.dart';
 
 class FastingInProgressView extends StatelessWidget {
@@ -10,6 +11,11 @@ class FastingInProgressView extends StatelessWidget {
         context,
         state.session,
       );
+
+  void _onStartTimeChanged(BuildContext context, DateTime newStartTime) {
+    final fastingBloc = context.read<FastingBloc>();
+    fastingBloc.add(UpdateActiveFastStartTime(newStartTime));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +31,7 @@ class FastingInProgressView extends StatelessWidget {
           StartTimeCard(
             startTime: session.start,
             iconColor: theme.colorScheme.primary,
+            onStartTimeChanged: (newStartTime) => _onStartTimeChanged(context, newStartTime),
           ),
           const SizedBox(height: 12),
           EndTimeCard(
