@@ -39,6 +39,10 @@ dependencies:
     path: ../packages/infrastructure/local_fasting_api
   local_settings_api:
     path: ../packages/infrastructure/local_settings_api
+  local_notifications_service:
+    path: ../packages/infrastructure/local_notifications_service
+  notifications_service:
+    path: ../packages/application/notifications_service
   settings_api:
     path: ../packages/infrastructure/settings_api
   settings_repository:

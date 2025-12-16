@@ -1,18 +1,83 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notifications_service/notifications_service.dart';
+import 'package:timezone/data/latest_all.dart' as tz_data;
+import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsService implements NotificationsService {
+  final FlutterLocalNotificationsPlugin _notifications =
+      FlutterLocalNotificationsPlugin();
+
+  bool _initialized = false;
+
+  /// Initialize the notifications service. Must be called before using.
+  Future<void> initialize() async {
+    if (_initialized) return;
+
+    // Initialize timezones
+    tz_data.initializeTimeZones();
+
+    const iosSettings = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    const initSettings = InitializationSettings(iOS: iosSettings);
+
+    await _notifications.initialize(
+      initSettings,
+      onDidReceiveNotificationResponse: _onNotificationTapped,
+    );
+
+    _initialized = true;
+  }
+
+  void _onNotificationTapped(NotificationResponse response) {
+    // Handle notification tap if needed
+    print('Notification tapped: $response');
+  }
+
   @override
-  void scheduleNotification({
+  Future<void> scheduleNotification({
     required int id,
     required String title,
     required String body,
     required DateTime scheduledDate,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    if (!_initialized) {
+      throw StateError(
+        'LocalNotificationsService must be initialized before use. '
+        'Call initialize() first.',
+      );
+    }
+
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    const notificationDetails = NotificationDetails(iOS: iosDetails);
+
+    final tzScheduledDate = tz.TZDateTime.from(scheduledDate, tz.local);
+
+    await _notifications.zonedSchedule(
+      id,
+      title,
+      body,
+      tzScheduledDate,
+      notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
   }
 
   @override
-  void cancelNotification(int id) {
-    throw UnimplementedError();
+  Future<void> cancelNotification(int id) async {
+    await _notifications.cancel(id);
+  }
+
+  /// Cancel all notifications
+  void cancelAllNotifications() {
+    _notifications.cancelAll();
   }
 }

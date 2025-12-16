@@ -6,6 +6,7 @@ import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:settings_repository/settings_repository.dart';
 import 'package:fasting_use_cases/fasting_use_cases.dart';
+import 'package:notifications_service/notifications_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsRepo = context.read<SettingsRepository>();
     final fastingRepo = context.read<FastingRepository>();
+    final notificationsService = context.read<NotificationsService>();
 
     return MultiBlocProvider(
       providers: [
@@ -35,10 +37,12 @@ class HomePage extends StatelessWidget {
               startFast: StartFastUseCase(
                 fastingRepo: fastingRepo,
                 settingsRepo: settingsRepo,
+                notificationsService: notificationsService,
               ),
               endFast: EndFastUseCase(
                 fastingRepo: fastingRepo,
                 settingsRepo: settingsRepo,
+                notificationsService: notificationsService,
               ),
               getActiveFast: GetActiveFastUseCase(
                 fastingRepo: fastingRepo,

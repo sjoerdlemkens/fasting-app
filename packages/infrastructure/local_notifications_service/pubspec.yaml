@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   flutter_local_notifications: ^19.5.0
+  timezone: ^0.10.1
   notifications_service: 
     path: ../../application/notifications_service
 

@@ -12,9 +12,10 @@ dependencies:
     path: ../../domain/fasting_domain
   fasting_repository:
     path: ../../domain/repositories/fasting_repository
-
   settings_repository:
     path: ../../domain/repositories/settings_repository
+  notifications_service:
+    path: ../notifications_service
 
 dev_dependencies:
   lints: ^6.0.0

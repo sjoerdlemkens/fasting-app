@@ -11,7 +11,7 @@ class SettingsRepository {
     required SettingsApi settingsApi,
   }) : _settingsApi = settingsApi;
 
-  Future<FastingWindow?> getFastingWindow() async {
+  Future<FastingWindow> getFastingWindow() async {
     final fastingType = _settingsApi.getFastingType();
 
     if (fastingType == null) return _defaultFastingWindow;
