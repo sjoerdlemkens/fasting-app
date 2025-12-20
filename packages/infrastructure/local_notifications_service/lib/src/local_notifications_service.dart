@@ -38,12 +38,7 @@ class LocalNotificationsService implements NotificationsService {
   }
 
   @override
-  Future<void> scheduleNotification({
-    required int id,
-    required String title,
-    required String body,
-    required DateTime scheduledDate,
-  }) async {
+  Future<void> scheduleNotification(Notification notification) async {
     if (!_initialized) {
       throw StateError(
         'LocalNotificationsService must be initialized before use. '
@@ -59,12 +54,15 @@ class LocalNotificationsService implements NotificationsService {
 
     const notificationDetails = NotificationDetails(iOS: iosDetails);
 
-    final tzScheduledDate = tz.TZDateTime.from(scheduledDate, tz.local);
+    final tzScheduledDate = tz.TZDateTime.from(
+      notification.scheduledDate,
+      tz.local,
+    );
 
     await _notifications.zonedSchedule(
-      id,
-      title,
-      body,
+      notification.id,
+      notification.title,
+      notification.body,
       tzScheduledDate,
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

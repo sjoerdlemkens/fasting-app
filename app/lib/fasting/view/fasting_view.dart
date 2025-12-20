@@ -12,8 +12,8 @@ class FastingView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: BlocBuilder<FastingBloc, FastingState>(
             builder: (context, state) => switch (state) {
-              FastingInitial() => FastingInitialView(),
-              FastingLoading() => LoadingView(),
+              FastingInitial() || FastingLoading() => LoadingView(),
+              FastingReady() => FastingInitialView(),
               FastingInProgress() => FastingInProgressView(state),
             },
           ),

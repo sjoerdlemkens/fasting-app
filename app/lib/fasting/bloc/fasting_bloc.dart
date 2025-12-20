@@ -69,15 +69,15 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         _stopPreviewTimer();
         _startTicker(startFrom: elapsed);
 
-        emit(FastingInProgress(activeFastingSession));
+        emit(FastingInProgress(activeFastingSession, null));
       } else {
         _startPreviewTimer();
-        emit(const FastingInitial());
+        emit(const FastingReady());
       }
     } catch (e) {
       // TODO:  Log the error
       _startPreviewTimer();
-      emit(const FastingInitial());
+      emit(const FastingReady());
     }
   }
 
@@ -87,7 +87,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     _startTicker();
 
     emit(
-      FastingInProgress(fastingSession),
+      FastingInProgress(fastingSession, null),
     );
   }
 
@@ -106,7 +106,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     _stopPreviewTimer();
     // Update every minute to refresh the end time preview
     _previewTimer = Timer.periodic(const Duration(minutes: 1), (_) {
-      if (state is FastingInitial) {
+      if (state is FastingReady) {
         add(const _PreviewTimerTicked());
       }
     });
@@ -126,7 +126,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
 
     _tickerSubscription?.cancel();
     _startPreviewTimer();
-    emit(FastingInitial());
+    emit(const FastingReady());
   }
 
   void _onTimerTicked(_TimerTicked event, Emitter<FastingState> emit) {
@@ -143,10 +143,10 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     _PreviewTimerTicked event,
     Emitter<FastingState> emit,
   ) {
-    if (state is! FastingInitial) return;
+    if (state is! FastingReady) return;
 
-    // Emit a new FastingInitial state to trigger UI rebuild
-    emit(const FastingInitial());
+    // Emit a new FastingReady state to trigger UI rebuild
+    emit(const FastingReady());
   }
 
   Future<void> _onUpdateActiveFastWindow(
@@ -162,7 +162,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
     try {
       final updatedSession = await _updateActiveFastWindow.call(event.window);
       if (updatedSession != null) {
-        emit(FastingInProgress(updatedSession));
+        emit(FastingInProgress(updatedSession, null));
       }
     } catch (e) {
       // On error, keep the current state unchanged
@@ -187,7 +187,7 @@ class FastingBloc extends Bloc<FastingEvent, FastingState> {
         // Recalculate elapsed time and restart ticker
         final elapsed = DateTime.now().difference(updatedSession.start);
         _startTicker(startFrom: elapsed);
-        emit(FastingInProgress(updatedSession));
+        emit(FastingInProgress(updatedSession, null));
       }
     } catch (e) {
       print(e);

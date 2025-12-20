@@ -13,13 +13,22 @@ final class FastingLoading extends FastingState {
   const FastingLoading();
 }
 
+final class FastingReady extends FastingState {
+  const FastingReady();
+}
+
 final class FastingInProgress extends FastingState {
   final FastingSession session;
+  final int? notificationId;
 
-  const FastingInProgress(this.session);
+  const FastingInProgress(this.session, this.notificationId);
 
   FastingInProgress copyWith({
     FastingSession? session,
+    int? notificationId,
   }) =>
-      FastingInProgress(session ?? this.session);
+      FastingInProgress(
+        session ?? this.session,
+        notificationId ?? this.notificationId,
+      );
 }

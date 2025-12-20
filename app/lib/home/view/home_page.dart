@@ -1,3 +1,4 @@
+import 'package:fasting_app/fasting/widgets/fasting_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/home/home.dart';
@@ -58,7 +59,9 @@ class HomePage extends StatelessWidget {
           },
         ),
       ],
-      child: HomeView(),
+      child: FastingListener(
+        child: HomeView(),
+      ),
     );
   }
 }
