@@ -13,7 +13,7 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Fasting Tracker',
+        title: 'Itermino',
         theme: FastingTheme.light,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
