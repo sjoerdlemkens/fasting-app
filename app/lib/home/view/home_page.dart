@@ -1,4 +1,4 @@
-import 'package:fasting_app/fasting/widgets/fasting_listener.dart';
+import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/home/home.dart';
@@ -31,10 +31,10 @@ class HomePage extends StatelessWidget {
             ),
           )..add(LoadSettings()),
         ),
-        BlocProvider<FastingBloc>(
+        BlocProvider<CurrentFastingSessionBloc>(
           create: (context) {
             final settingsBloc = context.read<SettingsBloc>();
-            return FastingBloc(
+            return CurrentFastingSessionBloc(
               startFast: StartFastUseCase(
                 fastingRepo: fastingRepo,
                 settingsRepo: settingsRepo,

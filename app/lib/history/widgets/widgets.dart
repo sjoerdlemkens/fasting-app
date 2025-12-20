@@ -3,3 +3,7 @@ export 'fasting_calendar.dart';
 export 'fast_card.dart';
 export 'last_fasts_section.dart';
 export 'month_selector.dart';
+export 'completed_fast_info.dart';
+export 'completed_fast_content.dart';
+export 'editable_end_time_card.dart';
+export 'fasting_plan_card.dart';

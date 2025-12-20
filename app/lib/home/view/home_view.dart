@@ -5,7 +5,7 @@ import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_app/home/home.dart';
 
 const _homeViewWidgets = {
-  HomePageView.fast: FastingView(),
+  HomePageView.fast: CurrentFastingSessionView(),
   HomePageView.history: HistoryView(),
   HomePageView.settings: SettingsView(),
 };

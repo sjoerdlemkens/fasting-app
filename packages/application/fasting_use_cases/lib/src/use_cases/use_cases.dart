@@ -1,9 +1,12 @@
 export 'start_fast_use_case.dart';
 export 'end_fast_use_case.dart';
 export 'get_active_fast_use_case.dart';
+export 'get_fasting_session_by_id_use_case.dart';
 export 'get_monthly_history_use_case.dart';
 export 'get_recent_fasts_use_case.dart';
 export 'get_fasting_window_use_case.dart';
 export 'set_fasting_window_use_case.dart';
 export 'update_active_fast_window_use_case.dart';
 export 'update_active_fast_start_time_use_case.dart';
+export 'update_completed_fast_use_case.dart';
+export 'delete_fast_use_case.dart';

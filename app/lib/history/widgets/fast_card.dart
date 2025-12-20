@@ -4,10 +4,12 @@ import 'package:intl/intl.dart';
 
 class FastCard extends StatelessWidget {
   final FastingSession session;
+  final VoidCallback? onTap;
 
   const FastCard({
     super.key,
     required this.session,
+    this.onTap,
   });
 
   String _formatDuration(Duration duration) {
@@ -43,20 +45,23 @@ class FastCard extends StatelessWidget {
     final endTime = session.end ?? DateTime.now();
     final dateRangeText = _formatDateRange(session.start, endTime);
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200.withOpacity(0.5),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Row(
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade200.withOpacity(0.5),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Row(
         children: [
           // Icon
           Container(
@@ -108,6 +113,7 @@ class FastCard extends StatelessWidget {
             size: 24,
           ),
         ],
+        ),
       ),
     );
   }

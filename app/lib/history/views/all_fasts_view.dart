@@ -1,6 +1,7 @@
 import 'package:fasting_app/history/history.dart';
 import 'package:fasting_app/misc/misc.dart';
 import 'package:fasting_app/home/home.dart';
+import 'package:fasting_app/fasting/edit_fasting_session/edit_fasting_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_repository/fasting_repository.dart';
@@ -50,6 +51,28 @@ class _AllFastsViewContent extends StatelessWidget {
     bloc.add(ChangeAllFastsMonth(nextMonth));
   }
 
+  Future<void> _onFastCardTap(
+    BuildContext context,
+    FastingSession session,
+  ) async {
+    if (session.id == null) return;
+
+    final result = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => EditFastingSessionView(sessionId: session.id!),
+      ),
+    );
+
+    // Refresh all fasts if something changed
+    if (result == true) {
+      final bloc = context.read<AllFastsBloc>();
+      final currentState = bloc.state;
+      if (currentState is AllFastsLoaded) {
+        bloc.add(LoadAllFastsMonth(currentState.currentMonth));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AllFastsBloc, AllFastsState>(
@@ -86,6 +109,10 @@ class _AllFastsViewContent extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 12),
                             child: FastCard(
                               session: state.fastingSessions[index],
+                              onTap: () => _onFastCardTap(
+                                context,
+                                state.fastingSessions[index],
+                              ),
                             ),
                           );
                         },
