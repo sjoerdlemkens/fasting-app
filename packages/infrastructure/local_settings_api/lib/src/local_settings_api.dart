@@ -5,6 +5,7 @@ class LocalSettingsApi implements SettingsApi {
   final SharedPreferences _sharedPrefs;
 
   static const String _fastingTypeKey = 'fasting_type';
+  static const String _notificationsEnabledKey = 'notifications_enabled';
 
   LocalSettingsApi({
     required SharedPreferences sharedPrefs,
@@ -16,4 +17,12 @@ class LocalSettingsApi implements SettingsApi {
   @override
   Future<void> setFastingType(int type) =>
       _sharedPrefs.setInt(_fastingTypeKey, type);
+
+  @override
+  bool? getNotificationsEnabled() =>
+      _sharedPrefs.getBool(_notificationsEnabledKey);
+
+  @override
+  Future<void> setNotificationsEnabled(bool enabled) =>
+      _sharedPrefs.setBool(_notificationsEnabledKey, enabled);
 }

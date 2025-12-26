@@ -6,6 +6,8 @@ export 'get_monthly_history_use_case.dart';
 export 'get_recent_fasts_use_case.dart';
 export 'get_fasting_window_use_case.dart';
 export 'set_fasting_window_use_case.dart';
+export 'get_notifications_enabled_use_case.dart';
+export 'set_notifications_enabled_use_case.dart';
 export 'update_active_fast_window_use_case.dart';
 export 'update_active_fast_start_time_use_case.dart';
 export 'update_completed_fast_use_case.dart';

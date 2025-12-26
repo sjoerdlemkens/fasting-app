@@ -24,4 +24,16 @@ class SettingsRepository {
     final fastingType = fastingWindow.toInt();
     await _settingsApi.setFastingType(fastingType);
   }
+
+  /// Gets whether notifications are enabled.
+  /// If not set, defaults to true.
+  Future<bool> getNotificationsEnabled() async {
+    final enabled = _settingsApi.getNotificationsEnabled();
+    return enabled ?? true;
+  }
+
+  /// Sets whether notifications are enabled.
+  Future<void> setNotificationsEnabled(bool enabled) async {
+    await _settingsApi.setNotificationsEnabled(enabled);
+  }
 }

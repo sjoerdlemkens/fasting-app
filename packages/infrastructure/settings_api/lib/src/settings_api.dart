@@ -5,4 +5,10 @@ abstract class SettingsApi {
 
   // Sets the fasting type.
   Future<void> setFastingType(int type);
+
+  /// Gets whether notifications are enabled.
+  bool? getNotificationsEnabled();
+
+  /// Sets whether notifications are enabled.
+  Future<void> setNotificationsEnabled(bool enabled);
 }

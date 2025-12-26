@@ -17,3 +17,12 @@ class UpdateFastingWindow extends SettingsEvent {
   @override
   List<Object> get props => [fastingWindow];
 }
+
+class UpdateNotificationsEnabled extends SettingsEvent {
+  final bool enabled;
+
+  const UpdateNotificationsEnabled(this.enabled);
+
+  @override
+  List<Object> get props => [enabled];
+}

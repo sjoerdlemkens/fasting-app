@@ -24,7 +24,7 @@ class SettingsLoadedView extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
-                'Preferences',
+                'Fasting',
                 style: TextStyle(
                   color: Color(0xFF6B7280),
                   fontSize: 14,
@@ -70,6 +70,51 @@ class SettingsLoadedView extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Notifications Section
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                'Notifications',
+                style: TextStyle(
+                  color: Color(0xFF6B7280),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[200]!.withOpacity(0.5),
+                    blurRadius: 1,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: SettingsListItem(
+                icon: Icons.notifications_outlined,
+                title: 'Enable Notifications',
+                trailing: Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 50,
+                    height: 10,
+                    child: Switch(
+                      value: settings.notificationsEnabled,
+                      onChanged: (enabled) {
+                        context.read<SettingsBloc>().add(
+                              UpdateNotificationsEnabled(enabled),
+                            );
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

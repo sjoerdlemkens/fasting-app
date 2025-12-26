@@ -1,6 +1,7 @@
 import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
 import 'package:fasting_app/l10n/app_localizations.dart';
 import 'package:fasting_app/notifications/bloc/notifications_bloc.dart';
+import 'package:fasting_app/settings/settings.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,19 +15,23 @@ class FastingListener extends StatelessWidget {
 
   void _onFastStarted(
       BuildContext context, CurrentFastingSessionInProgress state) {
-    final notificationsBloc = context.read<NotificationsBloc>();
+    final settingsState = context.read<SettingsBloc>().state;
 
-    notificationsBloc.add(
-      ScheduleNotification(
-        title: AppLocalizations.of(context)!.fastingEndNotificationTitle,
-        body: AppLocalizations.of(context)!.fastingEndNotificationBody,
-        scheduledDate: state.session.endsOn,
-      ),
-    );
+    if (settingsState is SettingsLoaded &&
+        settingsState.settings.notificationsEnabled) {
+      final notificationsBloc = context.read<NotificationsBloc>();
+
+      notificationsBloc.add(
+        ScheduleNotification(
+          title: AppLocalizations.of(context)!.fastingEndNotificationTitle,
+          body: AppLocalizations.of(context)!.fastingEndNotificationBody,
+          scheduledDate: state.session.endsOn,
+        ),
+      );
+    }
   }
 
-  void _onFastEnded(
-      BuildContext context, CurrentFastingSessionState state) {
+  void _onFastEnded(BuildContext context, CurrentFastingSessionState state) {
     // Notificatnion id should be addeded to fasting metadata
 
     // IF notificaiton is scheduled, cancel it
@@ -64,4 +69,3 @@ class FastingListener extends StatelessWidget {
         child: child,
       );
 }
-

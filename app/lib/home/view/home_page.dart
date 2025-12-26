@@ -30,6 +30,12 @@ class HomePage extends StatelessWidget {
             setFastingWindow: SetFastingWindowUseCase(
               settingsRepo: settingsRepo,
             ),
+            getNotificationsEnabled: GetNotificationsEnabledUseCase(
+              settingsRepo: settingsRepo,
+            ),
+            setNotificationsEnabled: SetNotificationsEnabledUseCase(
+              settingsRepo: settingsRepo,
+            ),
           )..add(LoadSettings()),
         ),
         BlocProvider<CurrentFastingSessionBloc>(
