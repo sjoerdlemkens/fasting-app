@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class SettingsLoadedView extends StatelessWidget {
   final SettingsLoaded state;
@@ -15,14 +16,14 @@ class SettingsLoadedView extends StatelessWidget {
     return Container(
       color: const Color(0xFFF8F8F8),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             // Preferences Section
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
               child: Text(
                 'Fasting',
                 style: TextStyle(
@@ -72,10 +73,10 @@ class SettingsLoadedView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.lg),
             // Notifications Section
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
               child: Text(
                 'Notifications',
                 style: TextStyle(

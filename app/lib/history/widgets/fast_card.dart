@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:intl/intl.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class FastCard extends StatelessWidget {
   final FastingSession session;
@@ -49,7 +50,7 @@ class FastCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -77,7 +78,7 @@ class FastCard extends StatelessWidget {
               size: 24,
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: AppSpacing.lg),
           // Content
           Expanded(
             child: Column(

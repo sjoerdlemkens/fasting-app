@@ -5,6 +5,7 @@ import 'package:fasting_app/home/home.dart';
 import 'package:fasting_app/history/history.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_use_cases/fasting_use_cases.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class EditFastingSessionView extends StatelessWidget {
   final int sessionId;
@@ -34,7 +35,7 @@ class EditFastingSessionView extends StatelessWidget {
         appBar: const HomeAppBar.withTitle('Fast Details'),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
             child: _EditFastingSessionViewContent(sessionId: sessionId),
           ),
         ),
@@ -129,12 +130,12 @@ class _EditFastingSessionViewContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.error_outline, size: 48, color: Colors.red),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSpacing.lg),
                   Text(
                     'Error: ${state.message}',
                     style: const TextStyle(color: Colors.red),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSpacing.lg),
                   TextButton(
                     onPressed: () {
                       final bloc = context.read<EditFastingSessionBloc>();
@@ -173,9 +174,9 @@ class _EditFastingSessionViewContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.lg),
           CompletedFastInfo(session),
-          const SizedBox(height: 32),
+          const SizedBox(height: AppSpacing.xxl),
           StartTimeCard(
             startTime: session.start,
             iconColor: theme.colorScheme.primary,
@@ -184,7 +185,7 @@ class _EditFastingSessionViewContent extends StatelessWidget {
                 : (newStartTime) =>
                     _onStartTimeChanged(context, newStartTime, session),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           EditableEndTimeCard(
             endTime: session.end,
             iconColor: theme.colorScheme.primary,
@@ -193,12 +194,12 @@ class _EditFastingSessionViewContent extends StatelessWidget {
                 : (newEndTime) =>
                     _onEndTimeChanged(context, newEndTime, session),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           FastingPlanCard(
             session: session,
             iconColor: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.xl),
           SizedBox(
             width: double.infinity,
             child: FilledButton(
@@ -208,7 +209,7 @@ class _EditFastingSessionViewContent extends StatelessWidget {
               style: FilledButton.styleFrom(
                 backgroundColor: Colors.red.shade50,
                 foregroundColor: Colors.red,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -223,7 +224,7 @@ class _EditFastingSessionViewContent extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: AppSpacing.xxl),
         ],
       ),
     );

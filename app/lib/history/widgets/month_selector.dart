@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class MonthSelector extends StatelessWidget {
   final DateTime currentMonth;
@@ -33,7 +34,7 @@ class MonthSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

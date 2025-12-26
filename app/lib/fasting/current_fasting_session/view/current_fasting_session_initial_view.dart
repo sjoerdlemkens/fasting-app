@@ -3,6 +3,7 @@ import 'package:fasting_app/fasting/current_fasting_session/current_fasting_sess
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class CurrentFastingSessionInitialView extends StatelessWidget {
   const CurrentFastingSessionInitialView({super.key});
@@ -55,26 +56,26 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSpacing.lg),
                   // Fasting Info with "Tap to begin" circle
                   Center(
                     child: ReadyFastInfo(
                       duration: duration,
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: AppSpacing.xxl),
                   // Start Time Card
                   StartTimeCard(
                     startTime: null,
                     iconColor: color,
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: AppSpacing.md),
                   // End Time Card
                   EndTimeCard(
                     endTime: endTime,
                     iconColor: color,
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: AppSpacing.md),
                   // Current Plan Card
                   Card(
                     child: InkWell(
@@ -82,7 +83,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
                         constraints: const BoxConstraints(minHeight: 72),
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(AppSpacing.lg),
                         child: Row(
                           children: [
                             Container(
@@ -98,7 +99,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                                 size: 24,
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            const SizedBox(width: AppSpacing.lg),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +134,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: AppSpacing.xl),
                   // Start Fast Button
                   SizedBox(
                     width: double.infinity,
@@ -142,7 +143,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                       style: FilledButton.styleFrom(
                         backgroundColor: color,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -157,7 +158,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: AppSpacing.xxl),
                 ],
               ),
             );

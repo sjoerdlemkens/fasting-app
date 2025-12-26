@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fasting_app/fasting/fasting.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class CompletedFastContent extends StatelessWidget {
   final Duration duration;
@@ -29,7 +30,7 @@ class CompletedFastContent extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           durationFormatted,
           style: const TextStyle(
@@ -40,7 +41,7 @@ class CompletedFastContent extends StatelessWidget {
           ),
         ),
         if (targetHours != null) ...[
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -51,7 +52,7 @@ class CompletedFastContent extends StatelessWidget {
                     ? const Color(0xFF4DB6AC)
                     : Colors.grey[600],
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: AppSpacing.xs),
               Text(
                 isGoalAchieved
                     ? "Goal achieved: $targetHours hours"

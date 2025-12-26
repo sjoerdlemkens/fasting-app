@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_use_cases/fasting_use_cases.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class AllFastsView extends StatelessWidget {
   const AllFastsView({super.key});
@@ -102,11 +103,11 @@ class _AllFastsViewContent extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(AppSpacing.lg),
                         itemCount: state.fastingSessions.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.only(bottom: AppSpacing.md),
                             child: FastCard(
                               session: state.fastingSessions[index],
                               onTap: () => _onFastCardTap(

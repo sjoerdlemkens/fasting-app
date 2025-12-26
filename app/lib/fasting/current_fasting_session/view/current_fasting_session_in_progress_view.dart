@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class CurrentFastingSessionInProgressView extends StatelessWidget {
   final CurrentFastingSessionInProgress state;
@@ -25,26 +26,26 @@ class CurrentFastingSessionInProgressView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.lg),
           ActiveFastInfo(session),
-          const SizedBox(height: 32),
+          const SizedBox(height: AppSpacing.xxl),
           StartTimeCard(
             startTime: session.start,
             iconColor: theme.colorScheme.primary,
             onStartTimeChanged: (newStartTime) =>
                 _onStartTimeChanged(context, newStartTime),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           EndTimeCard(
             endTime: session.endsOn,
             iconColor: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           CurrentPlanCard(
             session: session,
             iconColor: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.xl),
           SizedBox(
             width: double.infinity,
             child: FilledButton(
@@ -52,7 +53,7 @@ class CurrentFastingSessionInProgressView extends StatelessWidget {
               style: FilledButton.styleFrom(
                 backgroundColor: Colors.grey.shade200,
                 foregroundColor: Colors.black87,
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -67,7 +68,7 @@ class CurrentFastingSessionInProgressView extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: AppSpacing.xxl),
         ],
       ),
     );

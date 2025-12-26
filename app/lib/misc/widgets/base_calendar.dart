@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 /// A generic calendar widget that displays a month view with customizable day widgets.
 ///
@@ -42,7 +43,7 @@ class BaseCalendar extends StatelessWidget {
     this.header,
     this.showWeekdayLabels = true,
     this.weekdayLabels,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.padding = const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
     this.cellSpacing = 4,
   });
 
@@ -108,7 +109,7 @@ class BaseCalendar extends StatelessWidget {
   /// Builds the default header with month navigation
   Widget _buildDefaultHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -170,7 +171,7 @@ class BaseCalendar extends StatelessWidget {
         // Weekday labels
         if (showWeekdayLabels) _buildWeekdayLabels(),
 
-        if (showWeekdayLabels) const SizedBox(height: 8),
+        if (showWeekdayLabels) const SizedBox(height: AppSpacing.sm),
 
         // Calendar grid
         Expanded(

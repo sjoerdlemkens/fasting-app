@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fasting_app/fasting/current_fasting_session/utils/utils.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class ActiveFastContent extends StatelessWidget {
   final Duration elapsed;
@@ -27,7 +28,7 @@ class ActiveFastContent extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           elapsedFormatted,
           style: const TextStyle(
@@ -38,7 +39,7 @@ class ActiveFastContent extends StatelessWidget {
           ),
         ),
         if (targetHours != null) ...[
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -47,7 +48,7 @@ class ActiveFastContent extends StatelessWidget {
                 size: 16,
                 color: Colors.grey[600],
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: AppSpacing.xs),
               Text(
                 "Target: $targetHours hours",
                 style: TextStyle(

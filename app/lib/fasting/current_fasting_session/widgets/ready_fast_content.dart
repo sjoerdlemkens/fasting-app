@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class ReadyFastContent extends StatelessWidget {
   final Duration duration;
@@ -14,7 +15,7 @@ class ReadyFastContent extends StatelessWidget {
             size: 64,
             color: Colors.grey[400],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.lg),
           Text(
             "Not fasting",
             style: TextStyle(

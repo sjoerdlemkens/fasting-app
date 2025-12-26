@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_app/history/history.dart';
 import 'package:fasting_app/fasting/edit_fasting_session/edit_fasting_session.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class LastFastsSection extends StatelessWidget {
   final List<FastingSession> lastFasts;
@@ -54,15 +55,15 @@ class LastFastsSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.md),
         ...lastFasts.map((session) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.only(bottom: AppSpacing.md),
               child: FastCard(
                 session: session,
                 onTap: () => _onFastCardTap(context, session),
               ),
             )),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Center(
           child: TextButton(
             onPressed: () {

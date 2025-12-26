@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
 import 'package:fasting_repository/fasting_repository.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class EndFastDrawer extends StatelessWidget {
   final FastingSession session;
@@ -37,12 +38,12 @@ class EndFastDrawer extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(AppSpacing.xl),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text('End Fast'),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.xl),
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton(

@@ -1,6 +1,7 @@
 import 'package:fasting_app/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class HistoryLoadedView extends StatelessWidget {
   final HistoryLoaded state;
@@ -30,13 +31,13 @@ class HistoryLoadedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Calendar card
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -59,7 +60,7 @@ class HistoryLoadedView extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.xl),
           // Last Fasts section
           LastFastsSection(lastFasts: state.lastFasts),
         ],

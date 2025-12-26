@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class SettingsListItem extends StatelessWidget {
   final IconData icon;
@@ -19,7 +20,7 @@ class SettingsListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -35,7 +36,7 @@ class SettingsListItem extends StatelessWidget {
               color: Colors.grey[400],
               size: 24,
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSpacing.lg),
             Expanded(
               child: Text(
                 title,
@@ -47,7 +48,7 @@ class SettingsListItem extends StatelessWidget {
             ),
             if (trailing != null) ...[
               trailing!,
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSpacing.sm),
             ],
             if (onTap != null && trailing == null)
               Icon(

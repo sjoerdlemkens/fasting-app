@@ -1,5 +1,6 @@
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class CompletedFastInfo extends StatelessWidget {
   final FastingSession session;
@@ -26,7 +27,7 @@ class CompletedFastInfo extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -50,7 +51,7 @@ class CompletedFastInfo extends StatelessWidget {
               color: Colors.grey[600],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           Text(
             durationText,
             style: const TextStyle(

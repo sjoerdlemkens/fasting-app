@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class EndTimeCard extends StatelessWidget {
   final DateTime endTime;
@@ -39,7 +40,7 @@ class EndTimeCard extends StatelessWidget {
     return Card(
       child: Container(
         constraints: const BoxConstraints(minHeight: 72),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Row(
           children: [
             Container(
@@ -55,7 +56,7 @@ class EndTimeCard extends StatelessWidget {
                 size: 24,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSpacing.lg),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

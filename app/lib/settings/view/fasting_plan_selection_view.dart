@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class FastingPlanSelectionView extends StatelessWidget {
   final FastingWindow currentWindow;
@@ -43,10 +44,10 @@ class FastingPlanSelectionView extends StatelessWidget {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Column(
                     children: [
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.lg),
                       _PlanOption(
                         icon: Icons.schedule,
                         title: '16:8 Intermittent Fast',
@@ -55,7 +56,7 @@ class FastingPlanSelectionView extends StatelessWidget {
                         isSelected: selectedWindow == FastingWindow.sixteenEight,
                         onTap: () => _selectPlan(context, FastingWindow.sixteenEight),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.md),
                       _PlanOption(
                         icon: Icons.timelapse,
                         title: '18:6 Intermittent Fast',
@@ -64,7 +65,7 @@ class FastingPlanSelectionView extends StatelessWidget {
                         isSelected: selectedWindow == FastingWindow.eighteenSix,
                         onTap: () => _selectPlan(context, FastingWindow.eighteenSix),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.md),
                       _PlanOption(
                         icon: Icons.restaurant,
                         title: 'One Meal A Day (OMAD)',
@@ -78,7 +79,7 @@ class FastingPlanSelectionView extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSpacing.lg),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8F8F8),
                   border: Border(
@@ -147,7 +148,7 @@ class _PlanOption extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFFEFF6FF) : Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -165,7 +166,7 @@ class _PlanOption extends StatelessWidget {
               color: const Color(0xFF6B7280),
               size: 24,
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSpacing.lg),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,7 +191,7 @@ class _PlanOption extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSpacing.lg),
             Container(
               width: 20,
               height: 20,

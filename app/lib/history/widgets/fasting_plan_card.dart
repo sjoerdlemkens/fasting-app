@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fasting_repository/fasting_repository.dart';
+import 'package:fasting_app/app/theme/app_spacing.dart';
 
 class FastingPlanCard extends StatelessWidget {
   final FastingSession session;
@@ -33,7 +34,7 @@ class FastingPlanCard extends StatelessWidget {
     return Card(
       child: Container(
         constraints: const BoxConstraints(minHeight: 72),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Row(
           children: [
             Container(
@@ -49,7 +50,7 @@ class FastingPlanCard extends StatelessWidget {
                 size: 24,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppSpacing.lg),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
