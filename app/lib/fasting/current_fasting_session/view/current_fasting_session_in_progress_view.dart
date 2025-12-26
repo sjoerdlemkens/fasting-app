@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class CurrentFastingSessionInProgressView extends StatelessWidget {
   final CurrentFastingSessionInProgress state;
@@ -55,7 +56,7 @@ class CurrentFastingSessionInProgressView extends StatelessWidget {
                 foregroundColor: Colors.black87,
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 elevation: 0,
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FastingColors {
+abstract class AppColors {
   static const lightBlue = Color(0xFF87CEEB);
   static const peach = Color(0xFFFFB38B);
   static const almostWhite = Color(0xFFF8F8F8);

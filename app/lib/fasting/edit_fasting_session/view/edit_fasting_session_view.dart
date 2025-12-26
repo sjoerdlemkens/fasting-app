@@ -6,6 +6,7 @@ import 'package:fasting_app/history/history.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_use_cases/fasting_use_cases.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class EditFastingSessionView extends StatelessWidget {
   final int sessionId;
@@ -211,7 +212,7 @@ class _EditFastingSessionViewContent extends StatelessWidget {
                 foregroundColor: Colors.red,
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 elevation: 0,
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class EditableEndTimeCard extends StatelessWidget {
   final DateTime? endTime;
@@ -69,7 +70,7 @@ class EditableEndTimeCard extends StatelessWidget {
         onTap: onEndTimeChanged != null
             ? () => _showTimePickerDialog(context)
             : null,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         child: Container(
           constraints: const BoxConstraints(minHeight: 72),
           padding: const EdgeInsets.all(AppSpacing.lg),

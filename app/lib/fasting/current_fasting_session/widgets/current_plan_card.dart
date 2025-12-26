@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class CurrentPlanCard extends StatelessWidget {
   final FastingSession session;
@@ -55,7 +56,7 @@ class CurrentPlanCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () => _onTap(context),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         child: Container(
           constraints: const BoxConstraints(minHeight: 72),
           padding: const EdgeInsets.all(AppSpacing.lg),

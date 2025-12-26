@@ -1,6 +1,7 @@
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class CompletedFastInfo extends StatelessWidget {
   final FastingSession session;
@@ -30,7 +31,7 @@ class CompletedFastInfo extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade200.withOpacity(0.5),

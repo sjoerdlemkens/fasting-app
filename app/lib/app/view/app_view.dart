@@ -14,7 +14,7 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Itermino',
-        theme: FastingTheme.light,
+        theme: AppTheme.light,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: const HomePage(),

@@ -3,6 +3,7 @@ import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class SettingsLoadedView extends StatelessWidget {
   final SettingsLoaded state;
@@ -36,7 +37,7 @@ class SettingsLoadedView extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppRadius.lg),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey[200]!.withOpacity(0.5),
@@ -89,7 +90,7 @@ class SettingsLoadedView extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppRadius.lg),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey[200]!.withOpacity(0.5),

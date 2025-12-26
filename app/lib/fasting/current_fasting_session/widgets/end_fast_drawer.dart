@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/fasting/current_fasting_session/current_fasting_session.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class EndFastDrawer extends StatelessWidget {
   final FastingSession session;
@@ -34,7 +35,7 @@ class EndFastDrawer extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xxl)),
         ),
         child: SafeArea(
           child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class HomeNavBarItem extends StatelessWidget {
   final IconData icon;
@@ -15,7 +16,7 @@ class HomeNavBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: onPressed,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppRadius.md),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 8,

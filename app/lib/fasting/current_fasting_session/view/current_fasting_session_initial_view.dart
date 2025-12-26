@@ -4,6 +4,7 @@ import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class CurrentFastingSessionInitialView extends StatelessWidget {
   const CurrentFastingSessionInitialView({super.key});
@@ -80,7 +81,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                   Card(
                     child: InkWell(
                       onTap: () => _onPlanCardTap(context, fastingWindow),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       child: Container(
                         constraints: const BoxConstraints(minHeight: 72),
                         padding: const EdgeInsets.all(AppSpacing.lg),
@@ -145,7 +146,7 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
                         ),
                         elevation: 0,
                       ),

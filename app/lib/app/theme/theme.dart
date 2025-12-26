@@ -1,2 +1,2 @@
-export 'fasting_colors.dart';
-export 'fasting_theme.dart';
+export 'app_colors.dart';
+export 'app_theme.dart';

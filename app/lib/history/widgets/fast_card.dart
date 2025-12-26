@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:intl/intl.dart';
 import 'package:fasting_app/app/theme/app_spacing.dart';
+import 'package:fasting_app/app/theme/app_radius.dart';
 
 class FastCard extends StatelessWidget {
   final FastingSession session;
@@ -48,12 +49,12 @@ class FastCard extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppRadius.lg),
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade200.withOpacity(0.5),
@@ -70,7 +71,7 @@ class FastCard extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: iconBackgroundColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppRadius.md),
             ),
             child: Icon(
               icon,
