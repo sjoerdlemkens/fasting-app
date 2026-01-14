@@ -1,0 +1,19 @@
+name: drift_fasting_api
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+resolution: workspace
+publish_to: none
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  drift: ^2.30.1
+  fasting_api:
+    path: ../../../domain/abstract/fasting_api
+  drift_app_database:
+    path: ../../../infrastructure/data/db/drift_app_database
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6

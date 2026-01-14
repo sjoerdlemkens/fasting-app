@@ -1,5 +1,6 @@
 name: fasting_app
 description: "A new Flutter project."
+resolution: workspace
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -35,20 +36,20 @@ dependencies:
   bloc: ^9.1.0
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
-  local_fasting_api:
-    path: ../packages/infrastructure/local_fasting_api
-  local_settings_api:
-    path: ../packages/infrastructure/local_settings_api
-  local_notifications_service:
-    path: ../packages/infrastructure/local_notifications_service
   notifications_service:
     path: ../packages/application/notifications_service
-  settings_api:
-    path: ../packages/infrastructure/settings_api
   settings_repository:
     path: ../packages/domain/repositories/settings_repository
   fasting_repository:
     path: ../packages/domain/repositories/fasting_repository
+  drift_app_database:
+    path: ../packages/infrastructure/data/drift_app_database
+  drift_fasting_api:
+    path: ../packages/infrastructure/data/drift_fasting_api
+  local_settings_api:
+    path: ../packages/infrastructure/data/local_settings_api
+  local_notifications_service:
+    path: ../packages/infrastructure/local_notifications_service
   google_fonts: ^6.3.3
   flutter_launcher_icons: ^0.14.4
   intl: any
@@ -66,7 +67,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

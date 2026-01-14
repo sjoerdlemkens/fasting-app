@@ -8,7 +8,7 @@ environment:
   sdk: ^3.6.1
 
 # Add regular dependencies here.
-dependencies:
+# dependencies:
   # path: ^1.8.0
 
 dev_dependencies:

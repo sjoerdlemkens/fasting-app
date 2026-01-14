@@ -1,5 +1,5 @@
-import 'package:settings_api/settings_api.dart';
 import 'package:fasting_domain/fasting_domain.dart';
+import 'package:settings_api/settings_api.dart';
 import 'package:settings_repository/settings_repository.dart';
 
 const _defaultFastingWindow = FastingWindow.eighteenSix;

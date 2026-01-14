@@ -1,13 +1,13 @@
 import 'package:settings_api/settings_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalSettingsApi implements SettingsApi {
+class SharedPrefsSettingsApi implements SettingsApi {
   final SharedPreferences _sharedPrefs;
 
   static const String _fastingTypeKey = 'fasting_type';
   static const String _notificationsEnabledKey = 'notifications_enabled';
 
-  LocalSettingsApi({
+  SharedPrefsSettingsApi({
     required SharedPreferences sharedPrefs,
   }) : _sharedPrefs = sharedPrefs;
 

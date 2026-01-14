@@ -1,6 +1,5 @@
-import 'package:fasting_domain/fasting_domain.dart';
-import 'package:local_fasting_api/local_fasting_api.dart' as api;
-import 'package:fasting_repository/src/extensions/extensions.dart';
+import 'package:fasting_api/fasting_api.dart' as api;
+import 'package:fasting_repository/fasting_repository.dart';
 
 extension FastingSessionMappers on api.FastingSession {
   FastingSession toDomain() => FastingSession(

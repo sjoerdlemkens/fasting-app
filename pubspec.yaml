@@ -5,13 +5,23 @@ environment:
 
 # TODO: Use glob here
 workspace:
+  # Application
+  - app
   - packages/application/notifications_service
+
+  # Domain
   - packages/domain/fasting_domain
   - packages/domain/repositories/fasting_repository
   - packages/domain/repositories/settings_repository
-  - packages/infrastructure/settings_api
-  - packages/infrastructure/local_fasting_api
-  - packages/infrastructure/local_settings_api
+  - packages/domain/abstract/fasting_api
+  - packages/domain/abstract/settings_api
+
+  # Infrastructure
+  - packages/infrastructure/local_notifications_service
+  - packages/infrastructure/data/db/drift_app_database
+  - packages/infrastructure/data/drift_fasting_api
+  - packages/infrastructure/data/shared_prefs_settings_api
+
 dev_dependencies:
   melos: ^7.3.0
 
