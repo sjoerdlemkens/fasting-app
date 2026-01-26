@@ -1,47 +1,97 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:notifications_service/notifications_service.dart';
+import 'package:notifications_repository/notifications_repository.dart';
+import 'package:notifications_service/notifications_service.dart'
+    as notifications_service;
+import 'package:settings_repository/settings_repository.dart';
 
 part 'notifications_event.dart';
 part 'notifications_state.dart';
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
-  final NotificationsService _notificationsService;
+  final SettingsRepository _settingsRepo;
+  final NotificationsRepository _notificationsRepo;
+  final notifications_service.NotificationsService _notificationsService;
+
+  StreamSubscription<Notification>? _createdNotificationsSubscription;
+  StreamSubscription<bool>? _notificationsEnabledSubscription;
 
   NotificationsBloc({
-    required NotificationsService notificationsService,
-  })  : _notificationsService = notificationsService,
+    required SettingsRepository settingsRepo,
+    required NotificationsRepository notificationsRepo,
+    required notifications_service.NotificationsService notificationsService,
+  })  : _settingsRepo = settingsRepo,
+        _notificationsRepo = notificationsRepo,
+        _notificationsService = notificationsService,
         super(NotificationsInitial()) {
-    // on<ScheduleNotification>(_onScheduleNotification);
-    // on<CancelNotification>(_onCancelNotification);
+    // Setup event handlers
+
+    on<ScheduleNotification>(_onScheduleNotification);
+    on<_NotificationCreated>(_onNotificationCreated);
+    on<_NotificationsEnabledChanged>(_onNotificationsEnabledChanged);
+
+    // Setup subscriptions
+    _createdNotificationsSubscription =
+        _notificationsRepo.createdNotificationsStream.listen(
+      (notification) => add(_NotificationCreated(notification)),
+    );
+
+    _notificationsEnabledSubscription =
+        _settingsRepo.notificationsEnabledStream.listen(
+      (enabled) => add(_NotificationsEnabledChanged(enabled)),
+    );
   }
 
-  // void _onScheduleNotification(
-  //   ScheduleNotification event,
-  //   Emitter<NotificationsState> emit,
-  // ) async {
-  //   final notificationId = DateTime.now().millisecondsSinceEpoch % 2147483647;
+  void _onScheduleNotification(
+    ScheduleNotification event,
+    Emitter<NotificationsState> emit,
+  ) async {
+    try {
+      await _notificationsService.scheduleNotification(
+        notifications_service.Notification(
+          id: event.id,
+          title: event.title,
+          body: event.body,
+          scheduledAt: event.scheduledAt,
+        ),
+      );
+    } catch (e) {
+      log('Error scheduling notification: $e');
+    }
+  }
 
-  //   final notification = Notification(
-  //     id: notificationId,
-  //     title: event.title,
-  //     body: event.body,
-  //     scheduledDate: event.scheduledDate,
-  //   );
+  void _onNotificationCreated(
+    _NotificationCreated event,
+    Emitter<NotificationsState> emit,
+  ) {
+    final notification = event.notification;
+    emit(NotificationCreated(notification));
+  }
 
-  //   await _notificationsService.scheduleNotification(notification);
+  void _onNotificationsEnabledChanged(
+    _NotificationsEnabledChanged event,
+    Emitter<NotificationsState> emit,
+  ) async {
+    final notificationEnabled = event.enabled;
 
-  //   emit(NotificationScheduled(notificationId));
-  // }
+    _notificationsService.cancelAllNotifications();
 
-  // void _onCancelNotification(
-  //   CancelNotification event,
-  //   Emitter<NotificationsState> emit,
-  // ) =>
-  //     emit(
-  //       NotificationCancelled(
-  //         event.notificationId,
-  //       ),
-  //     );
+    if (notificationEnabled) {
+      final futureNotifications =
+          await _notificationsRepo.getNotifications(from: DateTime.now());
+
+      for (final notification in futureNotifications)
+        add(_NotificationCreated(notification));
+    }
+  }
+
+  Future<void> close() {
+    _createdNotificationsSubscription?.cancel();
+    _notificationsEnabledSubscription?.cancel();
+    return super.close();
+  }
 }

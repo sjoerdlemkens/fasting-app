@@ -6,4 +6,5 @@ class Notifications extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get titleTKey => text()();
   TextColumn get bodyTKey => text()();
+  DateTimeColumn get scheduledAt => dateTime()();
 }

@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:drift_app_database/drift_app_database.dart';
 import 'package:notifications_api/notifications_api.dart';
 
@@ -23,6 +24,7 @@ class DriftNotificationsApi implements NotificationsApi {
   Future<Notification> createNotification({
     required String titleTKey,
     required String bodyTKey,
+    required DateTime scheduledAt,
   }) async {
     final id = await _db
         .into(_db.notifications)
@@ -30,6 +32,7 @@ class DriftNotificationsApi implements NotificationsApi {
           NotificationsCompanion.insert(
             titleTKey: titleTKey,
             bodyTKey: bodyTKey,
+            scheduledAt: scheduledAt,
           ),
         );
 
@@ -39,8 +42,22 @@ class DriftNotificationsApi implements NotificationsApi {
   }
 
   @override
-  Future<List<Notification>> getNotifications() =>
-      _db.select(_db.notifications).get();
+  Future<List<Notification>> getNotifications({
+    DateTime? from,
+    DateTime? to,
+  }) async {
+    final query = _db.select(_db.notifications);
+
+    if (from != null) {
+      query.where((table) => table.scheduledAt.isBiggerThanValue(from));
+    }
+
+    if (to != null) {
+      query.where((table) => table.scheduledAt.isSmallerThanValue(to));
+    }
+
+    return query.get();
+  }
 
   @override
   Future<void> deleteNotification(int id) async {

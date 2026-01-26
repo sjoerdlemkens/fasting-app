@@ -9,10 +9,10 @@ final class NotificationsInitial extends NotificationsState {
   const NotificationsInitial();
 }
 
-final class NotificationScheduled extends NotificationsState {
-  final int notificationId;
+final class NotificationCreated extends NotificationsState {
+  final Notification notification;
 
-  const NotificationScheduled(this.notificationId);
+  const NotificationCreated(this.notification);
 }
 
 final class NotificationCancelled extends NotificationsState {

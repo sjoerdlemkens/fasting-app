@@ -40,12 +40,16 @@ dependencies:
     path: ../packages/application/notifications_service
   settings_repository:
     path: ../packages/domain/repositories/settings_repository
+  notifications_repository:
+    path: ../packages/domain/repositories/notifications_repository
   fasting_repository:
     path: ../packages/domain/repositories/fasting_repository
   drift_app_database:
     path: ../packages/infrastructure/data/db/drift_app_database
   drift_fasting_api:
     path: ../packages/infrastructure/data/drift_fasting_api
+  drift_notifications_api:
+    path: ../packages/infrastructure/data/drift_notifications_api
   local_settings_api:
     path: ../packages/infrastructure/data/shared_prefs_settings_api
   local_notifications_service:

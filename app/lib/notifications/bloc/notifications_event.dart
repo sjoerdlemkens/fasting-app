@@ -8,26 +8,37 @@ sealed class NotificationsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// class ScheduleNotification extends NotificationsEvent {
-//   final String title;
-//   final String body;
-//   final DateTime scheduledDate;
+final class ScheduleNotification extends NotificationsEvent {
+  final int id;
+  final String title;
+  final String body;
+  final DateTime scheduledAt;
 
-//   const ScheduleNotification({
-//     required this.title,
-//     required this.body,
-//     required this.scheduledDate,
-//   });
+  const ScheduleNotification({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.scheduledAt,
+  });
 
-//   @override
-//   List<Object> get props => [title, body, scheduledDate];
-// }
+  @override
+  List<Object> get props => [id, title, body, scheduledAt];
+}
 
-// class CancelNotification extends NotificationsEvent {
-//   final int notificationId;
+final class _NotificationCreated extends NotificationsEvent {
+  final Notification notification;
 
-//   const CancelNotification(this.notificationId);
+  const _NotificationCreated(this.notification);
 
-//   @override
-//   List<Object> get props => [notificationId];
-// }
+  @override
+  List<Object> get props => [notification];
+}
+
+final class _NotificationsEnabledChanged extends NotificationsEvent {
+  final bool enabled;
+
+  const _NotificationsEnabledChanged(this.enabled);
+
+  @override
+  List<Object> get props => [enabled];
+}

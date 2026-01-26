@@ -55,7 +55,7 @@ class LocalNotificationsService implements NotificationsService {
     const notificationDetails = NotificationDetails(iOS: iosDetails);
 
     final tzScheduledDate = tz.TZDateTime.from(
-      notification.scheduledDate,
+      notification.scheduledAt,
       tz.local,
     );
 
