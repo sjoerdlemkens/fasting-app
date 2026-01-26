@@ -1,10 +1,16 @@
+import 'dart:async';
 import 'package:notifications_api/notifications_api.dart';
 
 class NotificationsRepository {
   final NotificationsApi _notificationsApi;
+  final _createdNotificationsController =
+      StreamController<Notification>.broadcast();
 
-  const NotificationsRepository({required NotificationsApi notificationsApi})
+  NotificationsRepository({required NotificationsApi notificationsApi})
     : _notificationsApi = notificationsApi;
+
+  Stream<Notification> get createdNotificationsStream =>
+      _createdNotificationsController.stream;
 
   Future<Notification> createNotification({
     required String titleTKey,
@@ -14,6 +20,8 @@ class NotificationsRepository {
       titleTKey: titleTKey,
       bodyTKey: bodyTKey,
     );
+
+    _createdNotificationsController.add(notification);
 
     return notification;
   }
@@ -26,4 +34,8 @@ class NotificationsRepository {
 
   Future<void> deleteNotification(int id) =>
       _notificationsApi.deleteNotification(id);
+
+  void dispose() {
+    _createdNotificationsController.close();
+  }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:fasting_domain/fasting_domain.dart';
 import 'package:settings_api/settings_api.dart';
 import 'package:settings_repository/settings_repository.dart';
@@ -6,10 +7,14 @@ const _defaultFastingWindow = FastingWindow.eighteenSix;
 
 class SettingsRepository {
   final SettingsApi _settingsApi;
+  final _notificationsEnabledController = StreamController<bool>.broadcast();
 
-  const SettingsRepository({
+  SettingsRepository({
     required SettingsApi settingsApi,
   }) : _settingsApi = settingsApi;
+
+  Stream<bool> get notificationsEnabledStream =>
+      _notificationsEnabledController.stream;
 
   Future<FastingWindow> getFastingWindow() async {
     final fastingType = _settingsApi.getFastingType();
@@ -35,5 +40,10 @@ class SettingsRepository {
   /// Sets whether notifications are enabled.
   Future<void> setNotificationsEnabled(bool enabled) async {
     await _settingsApi.setNotificationsEnabled(enabled);
+    _notificationsEnabledController.add(enabled);
+  }
+
+  void dispose() {
+    _notificationsEnabledController.close();
   }
 }
