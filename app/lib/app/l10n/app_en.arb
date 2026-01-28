@@ -1,5 +1,7 @@
 {
   "@@locale":"en",
   "fastCompletedNotificationTitle": "Fasting Complete",
-  "fastCompletedNotificationBody": "You reached your goal. Great job!"
+  "fastCompletedNotificationBody": "You reached your goal. Great job!",
+  "notificationPermissionDeniedError": "Notification permission denied. Please enable it in settings.",
+  "unknownError": "An unknown error occurred."
 }

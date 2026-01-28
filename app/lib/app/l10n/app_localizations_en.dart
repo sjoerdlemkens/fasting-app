@@ -14,4 +14,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get fastCompletedNotificationBody =>
       'You reached your goal. Great job!';
+
+  @override
+  String get notificationPermissionDeniedError =>
+      'Notification permission denied. Please enable it in settings.';
+
+  @override
+  String get unknownError => 'An unknown error occurred.';
 }
