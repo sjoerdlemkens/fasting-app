@@ -8,17 +8,15 @@ class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
   void _onSettingsUpdateError(BuildContext context, SettingsUpdateError state) {
-    final errorMessage = switch (state.error) {
-      SettingsError.notificationPermissionDenied =>
-        AppLocalizations.of(context)!.notificationPermissionDeniedError,
-      SettingsError.unknown => AppLocalizations.of(context)!.unknownError,
-    };
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(errorMessage),
-      ),
-    );
+    if (state.error == SettingsError.notificationPermissionDenied) {
+      NotificationPermissionDialog.show(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.unknownError),
+        ),
+      );
+    }
   }
 
   @override
