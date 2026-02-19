@@ -118,8 +118,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               SettingsError.notificationPermissionDenied,
             ),
           );
-          // Re-emit the current state to ensure UI syncs back
-          emit(SettingsLoaded(currentState.settings));
           return;
         }
       }
