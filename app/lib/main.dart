@@ -6,13 +6,14 @@ import 'package:fasting_app/app/app.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:local_notifications_service/local_notifications_service.dart';
 import 'package:local_settings_api/shared_prefs_settings_api.dart';
+import 'package:logging/logging.dart';
 import 'package:notifications_repository/notifications_repository.dart';
 import 'package:settings_repository/settings_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppLogger.initialize();
+  AppLogger.initialize(level: Level.CONFIG);
 
   final db = DriftAppDatabase();
   final sharedPrefs = await SharedPreferences.getInstance();

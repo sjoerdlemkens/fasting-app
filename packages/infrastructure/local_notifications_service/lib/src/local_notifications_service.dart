@@ -1,7 +1,10 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:logging/logging.dart';
 import 'package:notifications_service/notifications_service.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+
+final _logger = Logger('LocalNotificationsService');
 
 class LocalNotificationsService implements NotificationsService {
   final FlutterLocalNotificationsPlugin _notifications =
@@ -30,11 +33,12 @@ class LocalNotificationsService implements NotificationsService {
     );
 
     _initialized = true;
+    _logger.config('LocalNotificationsService initialized successfully');
   }
 
   void _onNotificationTapped(NotificationResponse response) {
     // Handle notification tap if needed
-    print('Notification tapped: $response');
+    _logger.info('Notification tapped: ${response.id}');
   }
 
   @override
@@ -67,11 +71,18 @@ class LocalNotificationsService implements NotificationsService {
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
+
+    _logger.config(
+      'Notification [ID: ${notification.id}] scheduled successfully',
+    );
   }
 
   @override
   Future<void> cancelNotification(int id) async {
     await _notifications.cancel(id);
+    _logger.config(
+      'Notification [ID: $id] cancelled successfully',
+    ); 
   }
 
   /// Cancel all notifications

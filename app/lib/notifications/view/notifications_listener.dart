@@ -1,8 +1,12 @@
 import 'dart:developer';
+
 import 'package:fasting_app/app/app.dart';
 import 'package:fasting_app/notifications/bloc/notifications_bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logging/logging.dart';
+
+final _logger = Logger('NotificationsListener');
 
 class NotificationsListener extends StatelessWidget {
   final Widget child;
@@ -14,6 +18,9 @@ class NotificationsListener extends StatelessWidget {
 
   void _onNotificationCreated(BuildContext context, NotificationCreated state) {
     final notification = state.notification;
+    _logger.config(
+      'NotificationCreated triggered in view[ID: ${notification.id}]',
+    );
 
     final title = _translateNotificationTKey(context, notification.titleTKey);
     final body = _translateNotificationTKey(context, notification.bodyTKey);

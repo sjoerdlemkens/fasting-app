@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:fasting_app/fasting/current_fasting_session/utils/utils.dart';
-import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:notifications_repository/notifications_repository.dart';
 import 'package:notifications_service/notifications_service.dart';
@@ -17,11 +16,10 @@ class CurrentFastingSessionBloc
   final FastingRepository _fastingRepo;
   final SettingsRepository _settingsRepo;
   final NotificationsRepository _notificationsRepository;
-  final NotificationsService _notificationsService;
 
   final Ticker _ticker;
   StreamSubscription<int>? _tickerSubscription;
-  StreamSubscription<SettingsState>? _settingsSubscription;
+  StreamSubscription<FastingWindow>? _fastingWindowsSettingsSub;
   Timer? _previewTimer;
 
   CurrentFastingSessionBloc({
@@ -29,12 +27,10 @@ class CurrentFastingSessionBloc
     required SettingsRepository settingsRepo,
     required NotificationsRepository notificationsRepository,
     required NotificationsService notificationsService,
-    required SettingsBloc settingsBloc,
     Ticker ticker = const Ticker(),
   })  : _fastingRepo = fastingRepo,
         _settingsRepo = settingsRepo,
         _notificationsRepository = notificationsRepository,
-        _notificationsService = notificationsService,
         _ticker = ticker,
         super(const CurrentFastingSessionInitial()) {
     on<LoadActiveFast>(_onLoadActiveFast);
@@ -46,11 +42,10 @@ class CurrentFastingSessionBloc
     on<UpdateActiveFastStartTime>(_onUpdateActiveFastStartTime);
     on<_PreviewTimerTicked>(_onPreviewTimerTicked);
 
-    // Listen to SettingsBloc changes
-    _settingsSubscription = settingsBloc.stream.listen((settingsState) {
-      if (settingsState is SettingsLoaded) {
-        add(UpdateActiveFastWindow(settingsState.settings.fastingWindow));
-      }
+// Listen to fasting window changes in settings to update active fast if needed
+    _fastingWindowsSettingsSub =
+        settingsRepo.fastingWindowStream.listen((fastingWindow) {
+      add(UpdateActiveFastWindow(fastingWindow));
     });
 
     // Start preview timer for initial state
@@ -155,7 +150,9 @@ class CurrentFastingSessionBloc
   }
 
   void _onFastEnded(
-      FastEnded event, Emitter<CurrentFastingSessionState> emit) async {
+    FastEnded event,
+    Emitter<CurrentFastingSessionState> emit,
+  ) async {
     final state = this.state;
     if (state is! CurrentFastingSessionInProgress) return;
 
@@ -169,8 +166,7 @@ class CurrentFastingSessionBloc
       window: fastingWindow,
     );
 
-    // Cancel notification
-    await _notificationsService.cancelNotification(fastId);
+    await _notificationsRepository.deleteNotification(fastId);
 
     _tickerSubscription?.cancel();
     _startPreviewTimer();
@@ -189,10 +185,10 @@ class CurrentFastingSessionBloc
     await _fastingRepo.deleteFastingSession(fastingSession.id!);
 
     // If it has a notification, cancel it
-    if (fastingSession.notificationId != null)
-      await _notificationsService.cancelNotification(
-        fastingSession.notificationId!,
-      );
+    if (fastingSession.notificationId != null) {
+      await _notificationsRepository
+          .deleteNotification(fastingSession.notificationId!);
+    }
 
     _tickerSubscription?.cancel();
     _startPreviewTimer();
@@ -304,7 +300,7 @@ class CurrentFastingSessionBloc
   @override
   Future<void> close() {
     _tickerSubscription?.cancel();
-    _settingsSubscription?.cancel();
+    _fastingWindowsSettingsSub?.cancel();
     _stopPreviewTimer();
     return super.close();
   }

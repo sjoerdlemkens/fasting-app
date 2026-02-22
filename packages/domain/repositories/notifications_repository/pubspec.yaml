@@ -8,6 +8,7 @@ environment:
   sdk: ^3.10.1
 
 dependencies:
+  logging: ^1.0.2
   notifications_api:
     path: ../../abstract/notifications_api
 

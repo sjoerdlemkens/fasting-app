@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:logging/logging.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
@@ -12,12 +14,15 @@ import 'package:settings_repository/settings_repository.dart';
 part 'notifications_event.dart';
 part 'notifications_state.dart';
 
+final _logger = Logger('NotificationsBloc');
+
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   final SettingsRepository _settingsRepo;
   final NotificationsRepository _notificationsRepo;
   final notifications_service.NotificationsService _notificationsService;
 
   StreamSubscription<Notification>? _createdNotificationsSubscription;
+  StreamSubscription<int>? _deletedNotificationsSubscription;
   StreamSubscription<bool>? _notificationsEnabledSubscription;
 
   NotificationsBloc({
@@ -28,13 +33,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         _notificationsRepo = notificationsRepo,
         _notificationsService = notificationsService,
         super(NotificationsInitial()) {
-    // Initial cleanup
-    add(_NotificationsCleanUpRequested());
-
-    // Setup event handlers
+    // Event handlers
     on<ScheduleNotification>(_onScheduleNotification);
-    on<_NotificationsCleanUpRequested>(_onNotificationsCleanUp);
+    on<NotificationsCleanUpRequested>(_onNotificationsCleanUp);
     on<_NotificationCreated>(_onNotificationCreated);
+    on<_NotificationDeleted>(_onNotificationDeleted);
     on<_NotificationsEnabledChanged>(_onNotificationsEnabledChanged);
 
     // Setup subscriptions
@@ -42,6 +45,10 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         _notificationsRepo.createdNotificationsStream.listen(
       (notification) => add(_NotificationCreated(notification)),
     );
+
+    _deletedNotificationsSubscription = _notificationsRepo
+        .deletedNotificationsStream
+        .listen((notificationId) => add(_NotificationDeleted(notificationId)));
 
     _notificationsEnabledSubscription =
         _settingsRepo.notificationsEnabledStream.listen(
@@ -53,7 +60,26 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     ScheduleNotification event,
     Emitter<NotificationsState> emit,
   ) async {
+    print("on schedule notification...");
     try {
+      _logger.config(
+        'Received ScheduleNotification event [ID: ${event.id}]',
+      );
+
+      final notificationsEnabled =
+          await _settingsRepo.getNotificationsEnabled();
+
+      if (!notificationsEnabled) {
+        _logger.config(
+          'Skipping notification scheduling [ID: ${event.id}] - notifications disabled',
+        );
+        return;
+      }
+
+      _logger.config(
+        'Calling NotificationsService.scheduleNotification for [ID: ${event.id}]',
+      );
+
       await _notificationsService.scheduleNotification(
         notifications_service.Notification(
           id: event.id,
@@ -62,13 +88,17 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
           scheduledAt: event.scheduledAt,
         ),
       );
+
+      _logger.config(
+        'NotificationsService.scheduleNotification completed for [ID: ${event.id}]',
+      );
     } catch (e) {
-      log('Error scheduling notification: $e');
+      _logger.severe('Error scheduling notification: $e');
     }
   }
 
   void _onNotificationsCleanUp(
-    _NotificationsCleanUpRequested event,
+    NotificationsCleanUpRequested event,
     Emitter<NotificationsState> emit,
   ) async {
     try {
@@ -91,25 +121,60 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     emit(NotificationCreated(notification));
   }
 
+  void _onNotificationDeleted(
+    _NotificationDeleted event,
+    Emitter<NotificationsState> emit,
+  ) async {
+    final notificationId = event.notificationId;
+
+    try {
+      await _notificationsService.cancelNotification(notificationId);
+    } catch (e) {
+      _logger.info('Notification could not be canceled: $e');
+    }
+  }
+
   void _onNotificationsEnabledChanged(
     _NotificationsEnabledChanged event,
     Emitter<NotificationsState> emit,
   ) async {
     final notificationEnabled = event.enabled;
 
+    _logger.config(
+      'Notifications enabled changed: $notificationEnabled',
+    );
+
+    _logger.config('Canceling all notifications...');
     await _notificationsService.cancelAllNotifications();
+    _logger.config('All notifications canceled');
 
     if (notificationEnabled) {
-      final futureNotifications =
-          await _notificationsRepo.getNotifications(from: DateTime.now());
+      _logger.config('Fetching pending notifications to reschedule...');
+      try {
+        final futureNotifications =
+            await _notificationsRepo.getNotifications(from: DateTime.now());
 
-      for (final notification in futureNotifications)
-        add(_NotificationCreated(notification));
+        _logger.config(
+          'Found ${futureNotifications.length} pending notifications to reschedule',
+        );
+
+        for (final notification in futureNotifications) {
+          _logger.config(
+            'Re-adding notification [ID: ${notification.id}] to scheduling queue',
+          );
+          add(_NotificationCreated(notification));
+        }
+      } catch (e) {
+        _logger.severe('Error fetching pending notifications: $e');
+      }
+    } else {
+      _logger.config('Notifications disabled - skipping reschedule');
     }
   }
 
   Future<void> close() {
     _createdNotificationsSubscription?.cancel();
+    _deletedNotificationsSubscription?.cancel();
     _notificationsEnabledSubscription?.cancel();
     return super.close();
   }
