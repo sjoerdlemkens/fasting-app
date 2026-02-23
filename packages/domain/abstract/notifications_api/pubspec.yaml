@@ -7,9 +7,8 @@ publish_to: none
 environment:
   sdk: ^3.10.1
 
-# Add regular dependencies here.
-# dependencies:
-  # path: ^1.9.0
+dependencies:
+  equatable: ^2.0.5
 
 dev_dependencies:
   lints: ^6.0.0

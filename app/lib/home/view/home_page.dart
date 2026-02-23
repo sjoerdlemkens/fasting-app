@@ -29,24 +29,12 @@ class HomePage extends StatelessWidget {
           )..add(LoadSettings()),
         ),
         BlocProvider<CurrentFastingSessionBloc>(
-          create: (context) {
-            final settingsBloc = context.read<SettingsBloc>();
-            return CurrentFastingSessionBloc(
-              fastingRepo: fastingRepo,
-              settingsRepo: settingsRepo,
-              notificationsRepository: notificationsRepo,
-              notificationsService: notificationsService,
-              settingsBloc: settingsBloc,
-            )..add(LoadActiveFast());
-          },
-        ),
-        // TOOD: Provid this app wide 
-        BlocProvider<NotificationsBloc>(
-          create: (context) => NotificationsBloc(
+          create: (context) => CurrentFastingSessionBloc(
+            fastingRepo: fastingRepo,
             settingsRepo: settingsRepo,
-            notificationsRepo: notificationsRepo,
+            notificationsRepository: notificationsRepo,
             notificationsService: notificationsService,
-          ),
+          )..add(LoadActiveFast()),
         ),
       ],
       child: HomeView(),
