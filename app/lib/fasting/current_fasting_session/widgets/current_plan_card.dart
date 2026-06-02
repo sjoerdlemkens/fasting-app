@@ -111,4 +111,3 @@ class CurrentPlanCard extends StatelessWidget {
     );
   }
 }
-

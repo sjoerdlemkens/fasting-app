@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasting_app/settings/settings.dart';
 import 'package:fasting_repository/fasting_repository.dart';
 import 'package:fasting_app/app/theme/theme.dart';
+
 class FastingPlanSelectionView extends StatelessWidget {
   final FastingWindow currentWindow;
 
@@ -52,8 +53,10 @@ class FastingPlanSelectionView extends StatelessWidget {
                         title: '16:8 Intermittent Fast',
                         description:
                             'Great for beginners. Fast for 16 hours, eat within an 8-hour window.',
-                        isSelected: selectedWindow == FastingWindow.sixteenEight,
-                        onTap: () => _selectPlan(context, FastingWindow.sixteenEight),
+                        isSelected:
+                            selectedWindow == FastingWindow.sixteenEight,
+                        onTap: () =>
+                            _selectPlan(context, FastingWindow.sixteenEight),
                       ),
                       const SizedBox(height: AppSpacing.md),
                       _PlanOption(
@@ -62,7 +65,8 @@ class FastingPlanSelectionView extends StatelessWidget {
                         description:
                             'A step up. Fast for 18 hours, eat within a 6-hour window.',
                         isSelected: selectedWindow == FastingWindow.eighteenSix,
-                        onTap: () => _selectPlan(context, FastingWindow.eighteenSix),
+                        onTap: () =>
+                            _selectPlan(context, FastingWindow.eighteenSix),
                       ),
                       const SizedBox(height: AppSpacing.md),
                       _PlanOption(
@@ -152,9 +156,8 @@ class _PlanOption extends StatelessWidget {
           color: isSelected ? const Color(0xFFEFF6FF) : Colors.white,
           borderRadius: BorderRadius.circular(AppRadius.lg),
           border: Border.all(
-            color: isSelected
-                ? const Color(0xFFA3D5F7)
-                : const Color(0xFFE5E7EB),
+            color:
+                isSelected ? const Color(0xFFA3D5F7) : const Color(0xFFE5E7EB),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -202,7 +205,8 @@ class _PlanOption extends StatelessWidget {
                       : const Color(0xFFD1D5DB),
                   width: 2,
                 ),
-                color: isSelected ? const Color(0xFFA3D5F7) : Colors.transparent,
+                color:
+                    isSelected ? const Color(0xFFA3D5F7) : Colors.transparent,
               ),
               child: isSelected
                   ? const Center(
@@ -220,4 +224,3 @@ class _PlanOption extends StatelessWidget {
     );
   }
 }
-

@@ -15,4 +15,3 @@ class ReadyFastInfo extends StatelessWidget {
         child: ReadyFastContent(duration),
       );
 }
-

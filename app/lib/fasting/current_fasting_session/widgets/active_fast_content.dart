@@ -64,4 +64,3 @@ class ActiveFastContent extends StatelessWidget {
     );
   }
 }
-

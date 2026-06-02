@@ -79,4 +79,3 @@ class FastingStartEndRow extends StatelessWidget {
         ],
       );
 }
-

@@ -40,4 +40,3 @@ class _TimerTicked extends CurrentFastingSessionEvent {
 class _PreviewTimerTicked extends CurrentFastingSessionEvent {
   const _PreviewTimerTicked();
 }
-

@@ -16,14 +16,16 @@ class SettingsLoadedView extends StatelessWidget {
     return Container(
       color: const Color(0xFFF8F8F8),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: AppSpacing.sm),
             // Preferences Section
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
               child: Text(
                 'Fasting',
                 style: TextStyle(
@@ -76,7 +78,8 @@ class SettingsLoadedView extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             // Notifications Section
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
               child: Text(
                 'Notifications',
                 style: TextStyle(

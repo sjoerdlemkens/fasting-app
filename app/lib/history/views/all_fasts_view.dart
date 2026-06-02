@@ -104,7 +104,8 @@ class _AllFastsViewContent extends StatelessWidget {
                         itemCount: state.fastingSessions.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                            padding:
+                                const EdgeInsets.only(bottom: AppSpacing.md),
                             child: FastCard(
                               session: state.fastingSessions[index],
                               onTap: () => _onFastCardTap(

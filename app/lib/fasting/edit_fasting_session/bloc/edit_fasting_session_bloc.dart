@@ -57,13 +57,16 @@ class EditFastingSessionBloc
       }
 
       // If both times are provided, validate that end is after start
-      if (event.startTime != null && event.endTime != null && !event.endTime!.isAfter(event.startTime!)) {
+      if (event.startTime != null &&
+          event.endTime != null &&
+          !event.endTime!.isAfter(event.startTime!)) {
         emit(EditFastingSessionError('End time must be after start time'));
         return;
       }
 
       // Get the current session to validate against
-      final currentSession = await _fastingRepo.getFastingSessionById(currentState.session.id!);
+      final currentSession =
+          await _fastingRepo.getFastingSessionById(currentState.session.id!);
 
       // Use provided times or keep existing ones
       final newStartTime = event.startTime ?? currentSession.start;
@@ -105,4 +108,3 @@ class EditFastingSessionBloc
     }
   }
 }
-

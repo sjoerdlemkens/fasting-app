@@ -25,7 +25,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
     try {
       final month = event.month;
-      
+
       // Get monthly history grouped by day
       final firstDayOfMonth = DateTime(month.year, month.month, 1);
       final lastDayOfMonth = DateTime(month.year, month.month + 1, 0);

@@ -55,4 +55,3 @@ class TimeFormatter {
     return months[month - 1];
   }
 }
-

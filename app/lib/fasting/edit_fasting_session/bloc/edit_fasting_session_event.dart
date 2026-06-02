@@ -24,4 +24,3 @@ class UpdateFastingSessionTimes extends EditFastingSessionEvent {
 class DeleteFastingSession extends EditFastingSessionEvent {
   const DeleteFastingSession();
 }
-

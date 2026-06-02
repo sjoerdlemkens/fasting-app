@@ -38,4 +38,3 @@ class EditFastingSessionError extends EditFastingSessionState {
 
   const EditFastingSessionError(this.message);
 }
-

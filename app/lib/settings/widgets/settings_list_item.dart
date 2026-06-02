@@ -20,7 +20,8 @@ class SettingsListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -62,4 +63,3 @@ class SettingsListItem extends StatelessWidget {
     );
   }
 }
-
