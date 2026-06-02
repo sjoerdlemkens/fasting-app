@@ -12,7 +12,7 @@ class Notification extends Equatable {
     required this.bodyTKey,
     required this.scheduledAt,
   });
-  
+
   @override
   List<Object?> get props => [id, titleTKey, bodyTKey, scheduledAt];
 }

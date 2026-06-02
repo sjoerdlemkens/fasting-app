@@ -1,36 +1,34 @@
 name: fasting_workspace
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.11.0
 
-# TODO: Use glob here
 workspace:
-  # Application
   - app
-  - packages/application/notifications_service
-
-  # Domain
-  - packages/domain/repositories/fasting_repository
-  - packages/domain/repositories/settings_repository
-  - packages/domain/abstract/fasting_api
-  - packages/domain/abstract/settings_api
-  - packages/domain/repositories/notifications_repository
-  - packages/domain/abstract/notifications_api
-
-  # Infrastructure
-  - packages/infrastructure/local_notifications_service
-  - packages/infrastructure/data/db/drift_app_database
-  - packages/infrastructure/data/drift_fasting_api
-  - packages/infrastructure/data/shared_prefs_settings_api
-  - packages/infrastructure/data/drift_notifications_api
+  - packages/**
 
 dev_dependencies:
   melos: ^7.3.0
 
 melos:
   name: Fasting Tracker
+  sdkPath: auto
 
   scripts:
+    # Code formatting
+    format:
+      description: Check Dart code formatting
+      run: dart run melos exec -- "dart format --set-exit-if-changed ."
+
+    format:fix:
+      description: Fix Dart code formatting
+      run: dart run melos exec -- "dart format ."
+
+    # Code generation
+    build_runner:
+      description: Run build_runner to generate code
+      run: dart run melos exec --depends-on=build_runner -- "dart run build_runner build --delete-conflicting-outputs"
+
     # Linting scripts
     lint:
       description: Run dart analyze for all packages
@@ -47,46 +45,12 @@ melos:
     # Testing scripts
     test:
       description: Run tests for all packages
-      run: dart test
-      packageFilters:
-        dirExists: test
-      exec:
-        concurrency: 1
-        failFast: true
+      run: dart run melos exec --concurrency=1 --fail-fast --dir-exists=test -- "flutter test"
 
     test:coverage:
       description: Run tests with coverage for all packages
       run: dart test --coverage=coverage && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
       packageFilters:
         dirExists: test
-      exec:
-        concurrency: 1
-
-    # Code formatting
-    format:
-      description: Format all Dart code
-      run: dart format --set-exit-if-changed .
-      exec:
-        concurrency: 1
-
-    format:fix:
-      description: Format all Dart code (write changes)
-      run: dart format .
-      exec:
-        concurrency: 1
-
-    # Code generation
-    build_runner:
-      description: Run build_runner to generate code
-      run: dart run build_runner build --delete-conflicting-outputs
-      packageFilters:
-        dependsOn: build_runner
-      exec:
-        concurrency: 1
-
-    # Dependency management
-    upgrade:
-      description: Upgrade dependencies for all packages
-      run: dart pub upgrade
       exec:
         concurrency: 1

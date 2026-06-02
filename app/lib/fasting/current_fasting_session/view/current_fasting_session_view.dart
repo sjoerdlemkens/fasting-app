@@ -26,4 +26,3 @@ class CurrentFastingSessionView extends StatelessWidget {
         ),
       );
 }
-

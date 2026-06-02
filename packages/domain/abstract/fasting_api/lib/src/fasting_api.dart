@@ -26,5 +26,4 @@ abstract class FastingApi {
 
   /// Deletes a fasting session by its ID.
   Future<void> deleteFastingSession(int id);
-
 }

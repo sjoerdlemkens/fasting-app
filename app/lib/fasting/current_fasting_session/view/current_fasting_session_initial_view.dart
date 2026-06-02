@@ -143,7 +143,8 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
                       style: FilledButton.styleFrom(
                         backgroundColor: color,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(AppRadius.lg),
                         ),
@@ -168,4 +169,3 @@ class CurrentFastingSessionInitialView extends StatelessWidget {
     );
   }
 }
-

@@ -33,6 +33,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             : null,
       );
 }
-
-
-

@@ -48,9 +48,8 @@ class CompletedFastContent extends StatelessWidget {
               Icon(
                 isGoalAchieved ? Icons.check_circle : Icons.gps_fixed,
                 size: 16,
-                color: isGoalAchieved
-                    ? const Color(0xFF4DB6AC)
-                    : Colors.grey[600],
+                color:
+                    isGoalAchieved ? const Color(0xFF4DB6AC) : Colors.grey[600],
               ),
               const SizedBox(width: AppSpacing.xs),
               Text(
@@ -72,4 +71,3 @@ class CompletedFastContent extends StatelessWidget {
     );
   }
 }
-

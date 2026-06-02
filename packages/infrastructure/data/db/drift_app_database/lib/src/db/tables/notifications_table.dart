@@ -1,6 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:notifications_api/notifications_api.dart'
-    show Notification;
+import 'package:notifications_api/notifications_api.dart' show Notification;
 
 @UseRowClass(Notification)
 class Notifications extends Table {

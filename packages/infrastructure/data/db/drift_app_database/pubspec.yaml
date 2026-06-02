@@ -8,6 +8,10 @@ environment:
   sdk: ^3.10.1
 
 dependencies:
+  # Needs flutter sdk for path_provider
+  flutter:
+    sdk: flutter
+
   drift: ^2.30.1
   sqlite3: ^2.9.4
   path_provider: ^2.1.5

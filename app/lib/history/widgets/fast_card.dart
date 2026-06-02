@@ -16,7 +16,7 @@ class FastCard extends StatelessWidget {
   String _formatDuration(Duration duration) {
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    
+
     if (hours > 0) {
       return '${hours}h ${minutes}m';
     }
@@ -63,60 +63,59 @@ class FastCard extends StatelessWidget {
           ],
         ),
         child: Row(
-        children: [
-          // Icon
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: iconBackgroundColor,
-              borderRadius: BorderRadius.circular(AppRadius.md),
+          children: [
+            // Icon
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: iconBackgroundColor,
+                borderRadius: BorderRadius.circular(AppRadius.md),
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 24,
+              ),
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
+            const SizedBox(width: AppSpacing.lg),
+            // Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    durationText,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF1F2937), // gray-900
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    dateRangeText,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.grey[600],
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            // Chevron
+            Icon(
+              Icons.chevron_right,
+              color: Colors.grey[400],
               size: 24,
             ),
-          ),
-          const SizedBox(width: AppSpacing.lg),
-          // Content
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  durationText,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF1F2937), // gray-900
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  dateRangeText,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey[600],
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          // Chevron
-          Icon(
-            Icons.chevron_right,
-            color: Colors.grey[400],
-            size: 24,
-          ),
-        ],
+          ],
         ),
       ),
     );
   }
 }
-

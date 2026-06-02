@@ -127,4 +127,3 @@ class EditableEndTimeCard extends StatelessWidget {
     );
   }
 }
-

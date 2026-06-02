@@ -109,7 +109,8 @@ class BaseCalendar extends StatelessWidget {
   /// Builds the default header with month navigation
   Widget _buildDefaultHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

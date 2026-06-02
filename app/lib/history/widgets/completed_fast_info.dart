@@ -14,7 +14,7 @@ class CompletedFastInfo extends StatelessWidget {
   String _formatDuration(Duration duration) {
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    
+
     if (hours > 0) {
       return '${hours}h ${minutes}m';
     }
@@ -67,4 +67,3 @@ class CompletedFastInfo extends StatelessWidget {
     );
   }
 }
-

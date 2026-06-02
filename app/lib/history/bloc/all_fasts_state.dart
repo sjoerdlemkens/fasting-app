@@ -28,6 +28,3 @@ class AllFastsError extends AllFastsState {
 
   const AllFastsError(this.message);
 }
-
-
-

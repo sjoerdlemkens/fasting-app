@@ -47,7 +47,7 @@ class FastingCalendar extends StatelessWidget {
       dayBuilder: (date, isCurrentMonth, isToday) {
         final normalizedDate = _normalizeDate(date);
         final sessions = fastingSessionsByDay[normalizedDate] ?? [];
-        
+
         // If today and there's an active fast, include it
         FastingSession? todayActiveFast;
         if (isToday && activeFast != null) {

@@ -17,8 +17,8 @@ class NotificationPermissionDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AlertDialog(
         title: const Text('Notification Permissions'),
-        content:
-            const Text('Enable notifications in app settings to receive fasting reminders.'),
+        content: const Text(
+            'Enable notifications in app settings to receive fasting reminders.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),

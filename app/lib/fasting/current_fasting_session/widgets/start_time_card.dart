@@ -127,4 +127,3 @@ class StartTimeCard extends StatelessWidget {
     );
   }
 }
-

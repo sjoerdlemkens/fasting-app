@@ -5,7 +5,7 @@ import 'package:logging/logging.dart';
 
 /// A centralized logger for the application
 abstract class AppLogger {
-  /// Initializes the logger with the specified [level] 
+  /// Initializes the logger with the specified [level]
   /// or defaults based on the build mode
   static void initialize({Level? level}) {
     // Configure the root logger

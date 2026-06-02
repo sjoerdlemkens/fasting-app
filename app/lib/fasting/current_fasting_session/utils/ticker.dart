@@ -8,4 +8,3 @@ class Ticker {
     );
   }
 }
-

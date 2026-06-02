@@ -9,10 +9,7 @@ abstract class NotificationsApi {
 
   Future<Notification> getNotification(int id);
 
-  Future<List<Notification>> getNotifications({
-    DateTime? from,
-    DateTime? to,
-  });
+  Future<List<Notification>> getNotifications({DateTime? from, DateTime? to});
 
   Future<void> deleteNotification(int id);
 }
