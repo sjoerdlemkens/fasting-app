@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:fasting_api/fasting_api.dart'  show FastingSession;
+import 'package:fasting_api/fasting_api.dart' show FastingSession;
 
 @UseRowClass(FastingSession)
 class FastingSessions extends Table {
