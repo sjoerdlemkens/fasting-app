@@ -18,20 +18,16 @@ melos:
     # Code formatting
     format:
       description: Check Dart code formatting
-      run: dart format --set-exit-if-changed .
-      exec:
-        concurrency: 1
+      run: dart run melos exec -- "dart format --set-exit-if-changed ."
 
     format:fix:
       description: Fix Dart code formatting
-      run: dart format .
-      exec:
-        concurrency: 1
+      run: dart run melos exec -- "dart format ."
 
     # Code generation
     build_runner:
       description: Run build_runner to generate code
-      run: dart run melos exec --concurrency=1 --depends-on=build_runner -- "dart run build_runner build --delete-conflicting-outputs"
+      run: dart run melos exec --depends-on=build_runner -- "dart run build_runner build --delete-conflicting-outputs"
 
     # Linting scripts
     lint:
