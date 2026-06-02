@@ -45,12 +45,7 @@ melos:
     # Testing scripts
     test:
       description: Run tests for all packages
-      run: dart test
-      packageFilters:
-        dirExists: test
-      exec:
-        concurrency: 1
-        failFast: true
+      run: dart run melos exec --concurrency=1 --fail-fast --dir-exists=test -- "flutter test"
 
     test:coverage:
       description: Run tests with coverage for all packages
